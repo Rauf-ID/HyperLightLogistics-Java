@@ -57,6 +57,11 @@ public class Order {
     @JoinColumn(name = "delivery_option_id")
     private DeliveryOption deliveryOption;
 
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    private Integer quantity;
     private LocalDateTime orderDate;
     private String status;
     private Double totalPrice;
