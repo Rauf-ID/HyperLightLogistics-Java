@@ -19,11 +19,15 @@
 
 package com.hll.hyperlightlogistics.controller;
 
+import com.hll.hyperlightlogistics.dto.OrderRequestDTO;
+import com.hll.hyperlightlogistics.model.DeliveryOption;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -32,17 +36,14 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping
-    public ResponseEntity<Order> createOrder(
-            @RequestParam Long customerId,
-            @RequestParam Long productId,
-            @RequestParam Integer quantity) {
+    @PostMapping("/options")
+    public ResponseEntity<List<DeliveryOption>> prepareOrderAndGetDeliveryOptions(
+            @RequestBody OrderRequestDTO orderRequest) {
+        Order order = orderService.createOrder(orderRequest);
 
-        Order order = orderService.createOrder(customerId, productId, quantity);
+        List<DeliveryOption> deliveryOptions = orderService.requestDeliveryOptions(order);
 
-        orderService.requestDeliveryOptions(order);
-
-        return ResponseEntity.ok(order);
+        return ResponseEntity.ok(deliveryOptions);
     }
 
     @PostMapping("/{orderId}/initiate-delivery")
