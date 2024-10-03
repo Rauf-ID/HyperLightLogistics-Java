@@ -27,10 +27,10 @@ import org.springframework.kafka.config.TopicBuilder;
 @Configuration
 public class KafkaTopicConfig {
 
-    @Bean
-    public NewTopic deliveryOptionsResponseTopic() {
-        return TopicBuilder.name("delivery-options-request-topic")
-                .build();
-    }
+//    @Bean
+//    public NewTopic deliveryOptionsResponseTopic() {
+//        return TopicBuilder.name("delivery-options-request-topic")
+//                .build();
+//    }
 
 }

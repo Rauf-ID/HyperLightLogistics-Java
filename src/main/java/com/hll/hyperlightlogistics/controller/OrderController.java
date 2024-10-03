@@ -38,7 +38,7 @@ public class OrderController {
             @RequestParam Long productId,
             @RequestParam Integer quantity) {
 
-        Order order = orderService.createOrder(customerId, productId, quantity);
+        Order order = orderService.createOrder();
 
         orderService.requestDeliveryOptions(order);
 

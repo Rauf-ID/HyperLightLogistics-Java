@@ -20,6 +20,7 @@
 package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.kafka.KafkaProducer;
+import com.hll.hyperlightlogistics.model.DeliveryOption;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.repository.CustomerRepository;
 import com.hll.hyperlightlogistics.repository.DeliveryOptionRepository;
@@ -48,7 +49,7 @@ public class OrderService {
     @Autowired
     private KafkaProducer kafkaProducer;
 
-    public Order createOrder(Long customerId, Long productId, Integer quantity) {
+    public Order createOrder() {
         return new Order();
     }
 
