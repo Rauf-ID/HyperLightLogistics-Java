@@ -19,7 +19,9 @@
 
 package com.hll.hyperlightlogistics.service;
 
+import com.hll.hyperlightlogistics.dto.OrderRequestDTO;
 import com.hll.hyperlightlogistics.kafka.KafkaProducer;
+import com.hll.hyperlightlogistics.model.DeliveryOption;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.repository.CustomerRepository;
 import com.hll.hyperlightlogistics.repository.DeliveryOptionRepository;
@@ -48,15 +50,15 @@ public class OrderService {
     @Autowired
     private KafkaProducer kafkaProducer;
 
-    public Order createOrder(Long customerId, Long productId, Integer quantity) {
+    public Order createOrder(OrderRequestDTO orderRequest) {
         return new Order();
     }
 
-    public void requestDeliveryOptions(Order order) {
+    public List<DeliveryOption> requestDeliveryOptions(Order order) {
         String message = String.format("{ \"orderId\": %d, \"productId\": %d, \"customerId\": %d, \"quantity\": %d }",
                 order.getId(), order.getProduct().getId(), order.getCustomer().getId(), order.getQuantity());
 
-        kafkaProducer.sendMessage("delivery-options-request-topic", message);
+        return null;
     }
 
     public void initiateDelivery(Long orderId) {
