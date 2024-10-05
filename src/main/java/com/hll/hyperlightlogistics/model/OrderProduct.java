@@ -39,7 +39,7 @@ public class OrderProduct {
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("orderId")
+    @MapsId("productId")
     private Product product;
 
     private Integer quantity;

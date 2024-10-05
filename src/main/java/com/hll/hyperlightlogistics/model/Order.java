@@ -46,19 +46,16 @@ public class Order {
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "warehouse_id")
-    private Warehouse warehouse;
-
-    @ManyToOne
     @JoinColumn(name = "delivery_option_id")
     private DeliveryOption deliveryOption;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
+    private String deliveryAddress;
+    private Double shippingPrice;
     private LocalDateTime orderDate;
     private String status;
-    private Double shippingPrice;
 
     public void addProduct(Product product, Integer quantity) {
         OrderProduct orderProduct = new OrderProduct(this, product, quantity);
