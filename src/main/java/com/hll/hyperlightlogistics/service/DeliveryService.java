@@ -17,17 +17,19 @@
  * Copyright (C) 2024 Rauf Agaguliev
  */
 
-package com.hll.hyperlightlogistics.dto;
+package com.hll.hyperlightlogistics.service;
 
-import lombok.Data;
+import com.hll.hyperlightlogistics.dto.DeliveryOptionDTO;
+import com.hll.hyperlightlogistics.dto.DeliveryRequestDTO;
 
 import java.util.List;
 
-@Data
-public class OrderRequestDTO {
+public class DeliveryService {
 
-    private Long customerId;
-    private DeliveryAddressDTO deliveryAddress;
-    private List<ProductDTO> products;
+    public List<DeliveryOptionDTO> calculateDeliveryOptions(DeliveryRequestDTO deliveryRequest) {
+        List<DeliveryOptionDTO> deliveryOptions = null;
+
+        return null;
+    }
 
 }
