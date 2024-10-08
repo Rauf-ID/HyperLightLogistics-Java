@@ -28,7 +28,6 @@ public class DeliveryService {
 
     public List<DeliveryOptionDTO> calculateDeliveryOptions(DeliveryRequestDTO deliveryRequest) {
         List<DeliveryOptionDTO> deliveryOptions = null;
-
         return null;
     }
 

@@ -19,4 +19,15 @@
 
 package com.hll.hyperlightlogistics.dto;
 
-public class DeliveryOptionDTO {}
+import lombok.Data;
+
+import java.time.LocalDate;
+
+@Data
+public class DeliveryOptionDTO {
+
+    private String type;
+    private Double cost;
+    private LocalDate localDate;
+
+}
