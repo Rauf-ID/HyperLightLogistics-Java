@@ -14,35 +14,27 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.model;
+package com.hll.hyperlightlogistics.dto;
 
-import jakarta.persistence.*;
-import lombok.Data;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.math.BigDecimal;
 
-@Entity
-@Table(name = "warehouses")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Warehouse {
+public class ProductRequestDTO {
 
-    @Id
-    @SequenceGenerator(name = "warehouses_seq", sequenceName = "warehouses_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "warehouses_seq")
-    private Long id;
+    private String name;
+    private String description;
+    private Double price;
+    private String category;
+    private Double weight;
+    private Double length;
+    private Double width;
+    private Double height;
 
-    @Column(precision = 10, scale = 5)
-    private BigDecimal latitude;
-
-    @Column(precision = 10, scale = 5)
-    private BigDecimal longitude;
-
-    private String type;
-    private String status;
 }

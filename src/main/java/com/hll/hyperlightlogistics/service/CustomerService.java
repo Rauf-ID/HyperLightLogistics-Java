@@ -19,8 +19,36 @@
 
 package com.hll.hyperlightlogistics.service;
 
+import com.hll.hyperlightlogistics.dto.CustomerRequestDTO;
+import com.hll.hyperlightlogistics.model.CustomerAddress;
+import com.hll.hyperlightlogistics.model.Customer;
+import com.hll.hyperlightlogistics.repository.CustomerAddressesRepository;
+import com.hll.hyperlightlogistics.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomerService {
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private CustomerAddressesRepository addressesRepository;
+
+    public String createCustomer(CustomerRequestDTO customerRequest) {
+        Customer customer = new Customer();
+        customer.setName(customerRequest.getName());
+        customer.setEmail(customerRequest.getEmail());
+
+        Customer savedCustomer = customerRepository.save(customer);
+
+        return "Customer created with ID: " + savedCustomer.getId();
+    }
+
+    public List<CustomerAddress> getAllAddresses(Long customerId){
+        return addressesRepository.findByCustomerId(customerId);
+    }
 }

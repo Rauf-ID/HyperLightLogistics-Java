@@ -19,50 +19,44 @@
 
 package com.hll.hyperlightlogistics.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hll.hyperlightlogistics.dto.AddressDTO;
 import com.hll.hyperlightlogistics.dto.CustomerRequestDTO;
-import com.hll.hyperlightlogistics.mapper.AddressMapper;
+import com.hll.hyperlightlogistics.dto.ProductRequestDTO;
 import com.hll.hyperlightlogistics.model.CustomerAddress;
-import com.hll.hyperlightlogistics.repository.CustomerRepository;
-import com.hll.hyperlightlogistics.service.CustomerService;
+import com.hll.hyperlightlogistics.model.Product;
+import com.hll.hyperlightlogistics.repository.ProductRepository;
+import com.hll.hyperlightlogistics.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/customers")
-public class CustomerController {
+@RequestMapping("/api/products")
+public class ProductController {
 
     @Autowired
-    private CustomerService customerService;
+    private ProductService productService;
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private ProductRepository productRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
-    private AddressMapper addressMapper;
+    @PostMapping("/createProduct")
+    public ResponseEntity<String> createProduct(@RequestBody ProductRequestDTO productRequest) {
 
-    @PostMapping("/createCustomer")
-    public ResponseEntity<String> createCustomer(@RequestBody CustomerRequestDTO customerRequest) {
-
-        String response = customerService.createCustomer(customerRequest);
+        String response = productService.createProduct(productRequest);
 
         return ResponseEntity.ok(response);
 
     }
 
-    @GetMapping("/getAllAddresses/{customerId}")
-    public List<AddressDTO> getAllAddresses(@PathVariable Long customerId){
-        List<CustomerAddress> addressList = customerService.getAllAddresses(customerId);
-        return addressList.stream()
-                .map(addressMapper::toDTO)
-                .collect(Collectors.toList());
-    }
 }
+

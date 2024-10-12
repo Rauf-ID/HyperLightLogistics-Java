@@ -14,33 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.model;
+package com.hll.hyperlightlogistics.mapper;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.hll.hyperlightlogistics.dto.AddressDTO;
+import com.hll.hyperlightlogistics.model.CustomerAddress;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+@Component
+public class AddressMapper {
 
-@Entity
-@Table(name = "customers")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Customer {
-
-    @Id
-    @SequenceGenerator(name = "customers_seq", sequenceName = "customers_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customers_seq")
-    private Long id;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CustomerAddress> customerAddresses;
-
-    private String name;
-    private String email;
+    public AddressDTO toDTO(CustomerAddress address){
+        return new AddressDTO(
+                address.getCountry(),
+                address.getCity(),
+                address.getStreet(),
+                address.getStreetNumber(),
+                address.getPostcode()
+        );
+    }
 }
