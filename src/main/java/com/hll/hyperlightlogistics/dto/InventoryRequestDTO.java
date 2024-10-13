@@ -14,16 +14,22 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.repository;
+package com.hll.hyperlightlogistics.dto;
 
-import com.hll.hyperlightlogistics.model.Inventory;
-import com.hll.hyperlightlogistics.model.Product;
-import com.hll.hyperlightlogistics.model.Warehouse;
-import org.springframework.data.jpa.repository.JpaRepository;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public interface InventoryRepository extends JpaRepository<Inventory, Long> {
-    Inventory findByWarehouseAndProduct(Warehouse warehouse, Product product);
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class InventoryRequestDTO {
+
+    private Long warehouseId;
+    private Long productId;
+    private int quantity;
+
 }
