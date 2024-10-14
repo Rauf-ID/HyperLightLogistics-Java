@@ -21,9 +21,11 @@ package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.dto.DeliveryOptionDTO;
 import com.hll.hyperlightlogistics.dto.DeliveryRequestDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DeliveryService {
 
     public List<DeliveryOptionDTO> calculateDeliveryOptions(DeliveryRequestDTO deliveryRequest) {

@@ -20,7 +20,9 @@
 package com.hll.hyperlightlogistics.kafka;
 
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
 
+@Component
 public class KafkaConsumer {
 
     @KafkaListener(topics = "delivery-options-response-topic", groupId = "delivery_group")
