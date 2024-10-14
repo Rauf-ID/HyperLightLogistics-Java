@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.4'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id "com.google.protobuf" version "0.9.4"
 }
 
 group = 'com.hll'
@@ -37,6 +38,35 @@ dependencies {
 	testImplementation 'org.springframework.kafka:spring-kafka-test'
 //	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation group: 'com.google.protobuf', name: 'protobuf-java', version: '4.28.2'
+	implementation group: 'io.grpc', name: 'grpc-all', version: '1.68.0'
+}
+
+protobuf {
+	protoc {
+		artifact = 'com.google.protobuf:protoc:4.28.2'
+	}
+
+	plugins {
+		grpc {
+			artifact = 'io.grpc:protoc-gen-grpc-java:1.68.0'
+		}
+	}
+
+	generateProtoTasks {
+		all()*.plugins {
+			grpc {}
+		}
+	}
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs 'build/generated/source/proto/main/grpc', 'build/generated/source/proto/main/java'
+		}
+	}
 }
 
 tasks.named('test') {
