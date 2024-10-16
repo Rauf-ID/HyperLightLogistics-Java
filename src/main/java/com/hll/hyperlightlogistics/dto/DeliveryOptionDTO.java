@@ -27,7 +27,7 @@ import java.time.LocalDate;
 public class DeliveryOptionDTO {
 
     private String type;
-    private Double cost;
-    private LocalDate localDate;
+    private Double price;
+    private String deliveryTime;
 
 }
