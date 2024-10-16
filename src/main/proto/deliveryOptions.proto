@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "HyperLightLogistics-Go/api/proto";
+option java_multiple_files = true;
+
+service DeliveryOptionsService {
+    rpc CalculateDeliveryOptions (DeliveryRequest) returns (DeliveryResponse) {}
+}
+
+message Product {
+    int64 productId = 1;
+    int32 quantity = 2;
+}
+
+message DeliveryAddress {
+    string country = 1;
+    string city = 2;
+    string street = 3;
+    string zipcode = 4;
+}
+
+message DeliveryRequest {
+    int64 customerId = 1;
+    DeliveryAddress deliveryAddress = 2;
+    repeated Product products = 3;
+}
+
+message DeliveryOptions {
+    string type = 1;
+    string deliveryTime = 2;
+    double price = 3;
+}
+
+message DeliveryResponse {
+    repeated DeliveryOptions deliveryOptions = 1;
+}
