@@ -19,12 +19,13 @@
 
 package com.hll.hyperlightlogistics.controller;
 
+import com.hll.hyperlightlogistics.dto.ProductDTO;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.stream.Collectors;
 import java.util.List;
 
 @RestController
@@ -54,9 +55,15 @@ public class OrderController {
     }
 
     @GetMapping("/history/{customerId}")
-    public ResponseEntity<List<Order>> getOrderHistory(@PathVariable Long customerId) {
+    public ResponseEntity<List<ProductDTO>> getOrderHistory(@PathVariable Long customerId) {
         List<Order> orders = orderService.getOrdersByCustomerId(customerId);
-        return ResponseEntity.ok(orders);
+
+        List<ProductDTO> productList = orders.stream()
+                .flatMap(order -> order.getProducts().stream())
+                .map(product -> new ProductDTO(product.getName(), product.getDescription(), product.getPrice()))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(productList);
     }
 
 }

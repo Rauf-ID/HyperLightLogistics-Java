@@ -60,9 +60,11 @@ public class CustomerController {
 
     @GetMapping("/getAllAddresses/{customerId}")
     public List<AddressDTO> getAllAddresses(@PathVariable Long customerId){
+
         List<CustomerAddress> addressList = customerService.getAllAddresses(customerId);
         return addressList.stream()
                 .map(addressMapper::toDTO)
                 .collect(Collectors.toList());
+
     }
 }
