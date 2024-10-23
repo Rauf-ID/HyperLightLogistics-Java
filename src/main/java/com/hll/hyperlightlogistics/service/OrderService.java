@@ -55,7 +55,7 @@ public class OrderService {
 
     public void requestDeliveryOptions(Order order) {
         String message = String.format("{ \"orderId\": %d, \"productId\": %d, \"customerId\": %d, \"quantity\": %d }",
-                order.getId(), order.getProduct().getId(), order.getCustomer().getId(), order.getQuantity());
+                order.getId(), order.getProducts().getFirst().getId(), order.getCustomer().getId(), order.getQuantity());
 
         kafkaProducer.sendMessage("delivery-options-request-topic", message);
     }
@@ -67,6 +67,10 @@ public class OrderService {
             message = String.format("Order %d initiated for delivery", order.getId());
         }
         kafkaProducer.sendMessage("delivery-initiation-topic", message);
+    }
+
+    public List<Order> getOrdersByCustomerId(Long customerId) {
+        return orderRepository.findByCustomerId(customerId);
     }
 
 }

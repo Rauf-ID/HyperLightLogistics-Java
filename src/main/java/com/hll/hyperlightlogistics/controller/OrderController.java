@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
@@ -49,6 +51,12 @@ public class OrderController {
     public ResponseEntity<String> initiateDelivery(@PathVariable Long orderId) {
         orderService.initiateDelivery(orderId);
         return ResponseEntity.ok("Delivery initiated");
+    }
+
+    @GetMapping("/history/{customerId}")
+    public ResponseEntity<List<Order>> getOrderHistory(@PathVariable Long customerId) {
+        List<Order> orders = orderService.getOrdersByCustomerId(customerId);
+        return ResponseEntity.ok(orders);
     }
 
 }
