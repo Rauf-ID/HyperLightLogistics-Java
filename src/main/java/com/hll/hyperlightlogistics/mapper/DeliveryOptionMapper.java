@@ -37,6 +37,7 @@ public class DeliveryOptionMapper {
     public DeliveryRequest convertToGrpcRequest(DeliveryRequestDTO deliveryRequest) {
         DeliveryAddress address = DeliveryAddress.newBuilder()
                 .setCountry(deliveryRequest.getDeliveryAddress().getCountry())
+                .setState(deliveryRequest.getDeliveryAddress().getState())
                 .setCity(deliveryRequest.getDeliveryAddress().getCity())
                 .setStreet(deliveryRequest.getDeliveryAddress().getStreet())
                 .setZipcode(deliveryRequest.getDeliveryAddress().getZipcode())

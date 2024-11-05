@@ -25,6 +25,7 @@ import lombok.Data;
 public class DeliveryAddressDTO {
 
     private String country;
+    private String state;
     private String city;
     private String street;
     private String zipcode;

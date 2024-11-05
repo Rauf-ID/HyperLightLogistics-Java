@@ -10,19 +10,20 @@ service DeliveryOptionsService {
 }
 
 message Product {
-    int64 productId = 1;
-    int32 quantity = 2;
+    uint64 productId = 1;
+    uint32 quantity = 2;
 }
 
 message DeliveryAddress {
     string country = 1;
-    string city = 2;
-    string street = 3;
-    string zipcode = 4;
+    string state = 2;
+    string city = 3;
+    string street = 4;
+    string zipcode = 5;
 }
 
 message DeliveryRequest {
-    int64 customerId = 1;
+    uint64 customerId = 1;
     DeliveryAddress deliveryAddress = 2;
     repeated Product products = 3;
 }
