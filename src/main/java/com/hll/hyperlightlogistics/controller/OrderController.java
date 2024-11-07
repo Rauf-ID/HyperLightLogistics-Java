@@ -19,7 +19,6 @@
 
 package com.hll.hyperlightlogistics.controller;
 
-import com.hll.hyperlightlogistics.dto.OrderRequestDTO;
 import com.hll.hyperlightlogistics.model.DeliveryOption;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.service.OrderService;
@@ -38,7 +37,7 @@ public class OrderController {
 
     @PostMapping("/options")
     public ResponseEntity<List<DeliveryOption>> prepareOrderAndGetDeliveryOptions(
-            @RequestBody OrderRequestDTO orderRequest) {
+            @RequestBody Order orderRequest) {
         Order order = orderService.createOrder(orderRequest);
 
         List<DeliveryOption> deliveryOptions = orderService.requestDeliveryOptions(order);
