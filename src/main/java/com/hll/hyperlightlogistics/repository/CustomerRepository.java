@@ -20,6 +20,9 @@
 package com.hll.hyperlightlogistics.repository;
 
 import com.hll.hyperlightlogistics.model.Customer;
+import com.hll.hyperlightlogistics.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> {}
+import java.util.Optional;
+
+public interface CustomerRepository extends JpaRepository<Customer, Long> { }

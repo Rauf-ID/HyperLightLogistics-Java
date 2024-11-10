@@ -29,9 +29,9 @@ import lombok.NoArgsConstructor;
 public class AddressDTO {
 
     private String country;
+    private String state;
     private String city;
     private String street;
-    private String streetNumber;
     private String postcode;
 
 }

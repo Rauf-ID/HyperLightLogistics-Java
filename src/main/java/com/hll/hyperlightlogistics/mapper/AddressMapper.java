@@ -29,9 +29,9 @@ public class AddressMapper {
     public AddressDTO toDTO(CustomerAddress address){
         return new AddressDTO(
                 address.getCountry(),
+                address.getState(),
                 address.getCity(),
                 address.getStreet(),
-                address.getStreetNumber(),
                 address.getPostcode()
         );
     }

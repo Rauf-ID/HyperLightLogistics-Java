@@ -22,6 +22,7 @@ package com.hll.hyperlightlogistics.controller;
 import com.hll.hyperlightlogistics.dto.AddressDTO;
 import com.hll.hyperlightlogistics.dto.CustomerRequestDTO;
 import com.hll.hyperlightlogistics.mapper.AddressMapper;
+import com.hll.hyperlightlogistics.model.Customer;
 import com.hll.hyperlightlogistics.model.CustomerAddress;
 import com.hll.hyperlightlogistics.repository.CustomerRepository;
 import com.hll.hyperlightlogistics.service.CustomerService;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -56,6 +58,18 @@ public class CustomerController {
 
         return ResponseEntity.ok(response);
 
+    }
+
+    @PostMapping("/{customerId}/addAddress")
+    public ResponseEntity<String> addAddressToCustomer(
+            @PathVariable Long customerId,
+            @RequestBody AddressDTO addressRequest) {
+        try {
+            customerService.addAddressToCustomer(customerId, addressRequest);
+            return ResponseEntity.ok("Address added successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/getAllAddresses/{customerId}")

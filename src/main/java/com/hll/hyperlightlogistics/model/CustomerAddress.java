@@ -40,8 +40,8 @@ public class CustomerAddress {
     private Customer customer;
 
     private String country;
+    private String state;
     private String city;
     private String street;
-    private String streetNumber;
     private String postcode;
 }

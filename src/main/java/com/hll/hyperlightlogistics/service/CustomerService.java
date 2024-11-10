@@ -19,6 +19,7 @@
 
 package com.hll.hyperlightlogistics.service;
 
+import com.hll.hyperlightlogistics.dto.AddressDTO;
 import com.hll.hyperlightlogistics.dto.CustomerRequestDTO;
 import com.hll.hyperlightlogistics.model.CustomerAddress;
 import com.hll.hyperlightlogistics.model.Customer;
@@ -46,6 +47,25 @@ public class CustomerService {
         Customer savedCustomer = customerRepository.save(customer);
 
         return "Customer created with ID: " + savedCustomer.getId();
+    }
+
+    public void addAddressToCustomer(Long customerId, AddressDTO addressRequest) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        CustomerAddress newCustomerAddresses = new CustomerAddress();
+        newCustomerAddresses.setCustomer(customer);
+        newCustomerAddresses.setCountry(addressRequest.getCountry());
+        newCustomerAddresses.setState(addressRequest.getState());
+        newCustomerAddresses.setCity(addressRequest.getCity());
+        newCustomerAddresses.setStreet(addressRequest.getStreet());
+        newCustomerAddresses.setPostcode(addressRequest.getPostcode());
+
+        List<CustomerAddress> customerAddresses = customer.getCustomerAddresses();
+        customerAddresses.add(newCustomerAddresses);
+        customer.setCustomerAddresses(customerAddresses);
+
+        customerRepository.save(customer);
     }
 
     public List<CustomerAddress> getAllAddresses(Long customerId){
