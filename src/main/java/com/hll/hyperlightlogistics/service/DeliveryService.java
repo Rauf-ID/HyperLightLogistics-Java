@@ -19,8 +19,8 @@
 
 package com.hll.hyperlightlogistics.service;
 
-import com.hll.hyperlightlogistics.dto.DeliveryOptionDTO;
 import com.hll.hyperlightlogistics.dto.DeliveryRequestDTO;
+import com.hll.hyperlightlogistics.dto.ProductDeliveryOptionDTO;
 import com.hll.hyperlightlogistics.grpc.GrpcClient;
 import com.hll.hyperlightlogistics.mapper.DeliveryOptionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class DeliveryService {
     @Autowired
     private DeliveryOptionMapper deliveryOptionMapper;
 
-    public List<DeliveryOptionDTO> calculateDeliveryOptions(DeliveryRequestDTO deliveryRequest) {
+    public List<ProductDeliveryOptionDTO> calculateDeliveryOptions(DeliveryRequestDTO deliveryRequest) {
         DeliveryRequest grpcRequest = deliveryOptionMapper.convertToGrpcRequest(deliveryRequest);
         DeliveryResponse grpcResponse = grpcClient.getDeliveryOptions(grpcRequest);
         return deliveryOptionMapper.convertToDto(grpcResponse);

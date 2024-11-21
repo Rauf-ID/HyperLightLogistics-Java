@@ -22,11 +22,13 @@ package com.hll.hyperlightlogistics.mapper;
 import com.hll.hyperlightlogistics.dto.DeliveryOptionDTO;
 import com.hll.hyperlightlogistics.dto.DeliveryRequestDTO;
 import com.hll.hyperlightlogistics.dto.ProductDTO;
+import com.hll.hyperlightlogistics.dto.ProductDeliveryOptionDTO;
 import org.springframework.stereotype.Component;
 import proto.DeliveryAddress;
+import proto.DeliveryOptions;
 import proto.DeliveryRequest;
-import proto.DeliveryResponse;
 import proto.Product;
+import proto.ProductDeliveryOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,9 +61,25 @@ public class DeliveryOptionMapper {
                 .build();
     }
 
-    public List<DeliveryOptionDTO> convertToDto(DeliveryResponse grpcResponse) {
+    public List<ProductDeliveryOptionDTO> convertToDto(proto.DeliveryResponse grpcResponse) {
+        List<ProductDeliveryOptionDTO> productDeliveryOptions = new ArrayList<>();
+
+        for (proto.ProductDeliveryOptions productOption : grpcResponse.getProductsList()) {
+            ProductDeliveryOptionDTO productDeliveryOptionDTO = new ProductDeliveryOptionDTO();
+            productDeliveryOptionDTO.setProductId(productOption.getProductId());
+
+            List<DeliveryOptionDTO> deliveryOptions = getDeliveryOptionDTOS(productOption);
+
+            productDeliveryOptionDTO.setDeliveryOptions(deliveryOptions);
+            productDeliveryOptions.add(productDeliveryOptionDTO);
+        }
+
+        return productDeliveryOptions;
+    }
+
+    private List<DeliveryOptionDTO> getDeliveryOptionDTOS(ProductDeliveryOptions productOption) {
         List<DeliveryOptionDTO> deliveryOptions = new ArrayList<>();
-        for (proto.DeliveryOptions option : grpcResponse.getDeliveryOptionsList()) {
+        for (DeliveryOptions option : productOption.getDeliveryOptionsList()) {
             DeliveryOptionDTO deliveryOptionDTO = new DeliveryOptionDTO();
             deliveryOptionDTO.setType(option.getType());
             deliveryOptionDTO.setDeliveryTime(option.getDeliveryTime());

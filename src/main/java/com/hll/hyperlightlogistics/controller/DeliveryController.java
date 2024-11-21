@@ -19,8 +19,8 @@
 
 package com.hll.hyperlightlogistics.controller;
 
-import com.hll.hyperlightlogistics.dto.DeliveryOptionDTO;
 import com.hll.hyperlightlogistics.dto.DeliveryRequestDTO;
+import com.hll.hyperlightlogistics.dto.ProductDeliveryOptionDTO;
 import com.hll.hyperlightlogistics.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +39,8 @@ public class DeliveryController {
     private DeliveryService deliveryService;
 
     @PostMapping("/options")
-    public ResponseEntity<List<DeliveryOptionDTO>> getDeliveryOptions(@RequestBody DeliveryRequestDTO request) {
-        List<DeliveryOptionDTO> deliveryOptions = deliveryService.calculateDeliveryOptions(request);
+    public ResponseEntity<List<ProductDeliveryOptionDTO>> getDeliveryOptions(@RequestBody DeliveryRequestDTO request) {
+        List<ProductDeliveryOptionDTO> deliveryOptions = deliveryService.calculateDeliveryOptions(request);
         return ResponseEntity.ok(deliveryOptions);
     }
 
