@@ -19,6 +19,7 @@
 
 package com.hll.hyperlightlogistics.service;
 
+import com.hll.hyperlightlogistics.exceptionHandling.DatabaseException;
 import com.hll.hyperlightlogistics.model.Inventory;
 import com.hll.hyperlightlogistics.model.Product;
 import com.hll.hyperlightlogistics.model.Warehouse;
@@ -60,7 +61,12 @@ public class InventoryService {
             inventory.setQuantity(quantity);
         }
 
-        inventoryRepository.save(inventory);
-        return "Product added to inventory successfully";
+        try {
+            inventoryRepository.save(inventory);
+            return "Product added to inventory successfully";
+        }catch (Exception e){
+            throw new DatabaseException("Failed to add product to the inventory", e);
+
+        }
     }
 }

@@ -21,10 +21,12 @@ package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.dto.AddressDTO;
 import com.hll.hyperlightlogistics.dto.CustomerRequestDTO;
+import com.hll.hyperlightlogistics.exceptionHandling.DatabaseException;
 import com.hll.hyperlightlogistics.model.CustomerAddress;
 import com.hll.hyperlightlogistics.model.Customer;
 import com.hll.hyperlightlogistics.repository.CustomerAddressesRepository;
 import com.hll.hyperlightlogistics.repository.CustomerRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,14 +41,18 @@ public class CustomerService {
     @Autowired
     private CustomerAddressesRepository addressesRepository;
 
+    @Transactional
     public String createCustomer(CustomerRequestDTO customerRequest) {
         Customer customer = new Customer();
         customer.setName(customerRequest.getName());
         customer.setEmail(customerRequest.getEmail());
+        try {
+            Customer savedCustomer = customerRepository.save(customer);
+            return "Customer created with ID: " + savedCustomer.getId();
+        } catch (Exception e) {
+            throw new DatabaseException("Failed to add customer to the database", e);
 
-        Customer savedCustomer = customerRepository.save(customer);
-
-        return "Customer created with ID: " + savedCustomer.getId();
+        }
     }
 
     public void addAddressToCustomer(Long customerId, AddressDTO addressRequest) {

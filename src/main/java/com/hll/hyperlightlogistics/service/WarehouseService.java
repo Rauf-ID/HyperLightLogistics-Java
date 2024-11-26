@@ -20,6 +20,7 @@
 package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.dto.WarehouseRequestDTO;
+import com.hll.hyperlightlogistics.exceptionHandling.DatabaseException;
 import com.hll.hyperlightlogistics.model.Warehouse;
 import com.hll.hyperlightlogistics.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,12 @@ public class WarehouseService {
         warehouse.setType(warehouseRequest.getType());
         warehouse.setStatus(warehouseRequest.getStatus());
 
-        Warehouse savedWarehouse = warehouseRepository.save(warehouse);
-        return "Warehouse created with ID: " + savedWarehouse.getId();
+        try{
+            Warehouse savedWarehouse = warehouseRepository.save(warehouse);
+            return "Warehouse created with ID: " + savedWarehouse.getId();
+        }catch (Exception e) {
+            throw new DatabaseException("Failed to add warehouse to the database", e);
 
+        }
     }
-
 }

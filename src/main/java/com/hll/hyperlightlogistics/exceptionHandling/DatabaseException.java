@@ -17,33 +17,15 @@
  * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.model;
+package com.hll.hyperlightlogistics.exceptionHandling;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+public class DatabaseException extends RuntimeException {
 
-@Entity
-@Table(name = "addresses")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class CustomerAddress {
+    public DatabaseException(String message) {
+        super(message);
+    }
 
-    @Id
-    @SequenceGenerator(name = "address_seq", sequenceName = "address_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq")
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
-    private String country;
-    private String state;
-    private String city;
-    private String street;
-    private String postcode;
-
+    public DatabaseException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

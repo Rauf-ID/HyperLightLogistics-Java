@@ -20,6 +20,7 @@
 package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.dto.ProductRequestDTO;
+import com.hll.hyperlightlogistics.exceptionHandling.DatabaseException;
 import com.hll.hyperlightlogistics.model.Product;
 import com.hll.hyperlightlogistics.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +44,12 @@ public class ProductService {
         product.setWidth(productRequest.getWidth());
         product.setHeight(productRequest.getHeight());
 
-        Product savedProduct = productRepository.save(product);
-        return "Product created with ID: " + savedProduct.getId();
+        try {
+            Product savedProduct = productRepository.save(product);
+            return "Product created with ID: " + savedProduct.getId();
+        }catch (Exception e) {
+            throw new DatabaseException("Failed to add product to the database", e);
 
+        }
     }
-
-
 }
