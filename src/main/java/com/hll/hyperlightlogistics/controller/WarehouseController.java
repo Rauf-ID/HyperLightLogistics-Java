@@ -20,19 +20,12 @@
 package com.hll.hyperlightlogistics.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hll.hyperlightlogistics.dto.ProductRequestDTO;
 import com.hll.hyperlightlogistics.dto.WarehouseRequestDTO;
-import com.hll.hyperlightlogistics.model.Warehouse;
-import com.hll.hyperlightlogistics.repository.ProductRepository;
 import com.hll.hyperlightlogistics.repository.WarehouseRepository;
-import com.hll.hyperlightlogistics.service.ProductService;
 import com.hll.hyperlightlogistics.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/warehouses")

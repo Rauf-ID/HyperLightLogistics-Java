@@ -20,21 +20,12 @@
 package com.hll.hyperlightlogistics.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hll.hyperlightlogistics.dto.AddressDTO;
-import com.hll.hyperlightlogistics.dto.CustomerRequestDTO;
 import com.hll.hyperlightlogistics.dto.ProductRequestDTO;
-import com.hll.hyperlightlogistics.model.CustomerAddress;
-import com.hll.hyperlightlogistics.model.Product;
 import com.hll.hyperlightlogistics.repository.ProductRepository;
 import com.hll.hyperlightlogistics.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/products")
