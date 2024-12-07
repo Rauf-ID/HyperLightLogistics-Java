@@ -46,16 +46,20 @@ public class OrderController {
         orderService.requestDeliveryOptions(order);
 
         return ResponseEntity.ok(order);
+
     }
 
     @PostMapping("/{orderId}/initiate-delivery")
     public ResponseEntity<String> initiateDelivery(@PathVariable Long orderId) {
+
         orderService.initiateDelivery(orderId);
         return ResponseEntity.ok("Delivery initiated");
+
     }
 
     @GetMapping("/history/{customerId}")
     public ResponseEntity<List<ProductDTO>> getOrderHistory(@PathVariable Long customerId) {
+
         List<Order> orders = orderService.getOrdersByCustomerId(customerId);
 
         List<ProductDTO> productList = orders.stream()
@@ -64,6 +68,7 @@ public class OrderController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(productList);
+
     }
 
 }

@@ -56,6 +56,7 @@ public class WarehouseControllerTest {
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("Warehouse created", response.getBody());
         verify(warehouseService, times(1)).createWarehouse(warehouseRequest);
+
     }
 
     @Test
@@ -71,6 +72,7 @@ public class WarehouseControllerTest {
         } catch (Exception e) {
             assertEquals("Service error", e.getMessage());
         }
+
     }
 
 }

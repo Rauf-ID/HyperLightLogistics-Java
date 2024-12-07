@@ -37,11 +37,13 @@ public class InventoryController {
 
     @PostMapping("/addProduct")
     public ResponseEntity<String> addProductToInventory(@RequestBody InventoryRequestDTO request) {
+
         String response = inventoryService.addProductToInventory(
                 request.getWarehouseId(),
                 request.getProductId(),
                 request.getQuantity()
         );
         return ResponseEntity.ok(response);
+
     }
 }

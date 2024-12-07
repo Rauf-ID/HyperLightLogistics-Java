@@ -20,7 +20,6 @@
 package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.kafka.KafkaProducer;
-import com.hll.hyperlightlogistics.model.DeliveryOption;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.repository.CustomerRepository;
 import com.hll.hyperlightlogistics.repository.DeliveryOptionRepository;
@@ -54,23 +53,29 @@ public class OrderService {
     }
 
     public void requestDeliveryOptions(Order order) {
+
         String message = String.format("{ \"orderId\": %d, \"productId\": %d, \"customerId\": %d, \"quantity\": %d }",
                 order.getId(), order.getProducts().getFirst().getId(), order.getCustomer().getId(), order.getQuantity());
 
         kafkaProducer.sendMessage("delivery-options-request-topic", message);
+
     }
 
     public void initiateDelivery(Long orderId) {
+
         Order order = orderRepository.findOrderById(orderId).orElse(null);
         String message = null;
         if (order != null) {
             message = String.format("Order %d initiated for delivery", order.getId());
         }
         kafkaProducer.sendMessage("delivery-initiation-topic", message);
+
     }
 
     public List<Order> getOrdersByCustomerId(Long customerId) {
+
         return orderRepository.findByCustomerId(customerId);
+
     }
 
 }

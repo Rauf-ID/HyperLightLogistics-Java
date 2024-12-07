@@ -26,5 +26,7 @@ import java.util.List;
 
 @Repository
 public interface CustomerAddressesRepository extends JpaRepository<CustomerAddress, Long> {
+
     List<CustomerAddress> findByCustomerId(Long customerId);
+
 }

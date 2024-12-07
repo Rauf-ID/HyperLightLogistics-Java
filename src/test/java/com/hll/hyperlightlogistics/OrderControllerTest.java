@@ -59,6 +59,7 @@ public class OrderControllerTest {
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(new Order(), response.getBody());
         verify(orderService, times(1)).createOrder();
+
     }
 
     @Test
@@ -69,6 +70,7 @@ public class OrderControllerTest {
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("Delivery initiated", response.getBody());
         verify(orderService, times(1)).initiateDelivery(1L);
+
     }
 
     @Test
@@ -114,8 +116,6 @@ public class OrderControllerTest {
         assertEquals(200.0, productDTO2.getPrice());
 
         verify(orderService, times(1)).getOrdersByCustomerId(customerId);
+
     }
-
-
-
 }

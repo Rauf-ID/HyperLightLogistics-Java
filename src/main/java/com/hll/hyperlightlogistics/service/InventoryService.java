@@ -44,6 +44,7 @@ public class InventoryService {
 
     @Transactional
     public String addProductToInventory(Long warehouseId, Long productId, int quantity) {
+
         Warehouse warehouse = warehouseRepository.findById(warehouseId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid warehouse ID"));
 

@@ -43,6 +43,7 @@ public class CustomerService {
 
     @Transactional
     public String createCustomer(CustomerRequestDTO customerRequest) {
+
         Customer customer = new Customer();
         customer.setName(customerRequest.getName());
         customer.setEmail(customerRequest.getEmail());
@@ -56,6 +57,7 @@ public class CustomerService {
     }
 
     public void addAddressToCustomer(Long customerId, AddressDTO addressRequest) {
+
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
 
@@ -72,9 +74,12 @@ public class CustomerService {
         customer.setCustomerAddresses(customerAddresses);
 
         customerRepository.save(customer);
+
     }
 
     public List<CustomerAddress> getAllAddresses(Long customerId){
+
         return addressesRepository.findByCustomerId(customerId);
+
     }
 }

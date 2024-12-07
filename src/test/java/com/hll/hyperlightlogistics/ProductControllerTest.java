@@ -56,6 +56,7 @@ public class ProductControllerTest {
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("Product created", response.getBody());
         verify(productService, times(1)).createProduct(productRequest);
+
     }
 
     @Test
@@ -71,6 +72,6 @@ public class ProductControllerTest {
         } catch (Exception e) {
             assertEquals("Service error", e.getMessage());
         }
-    }
 
+    }
 }

@@ -51,7 +51,9 @@ class CustomerControllerTest {
 
     @BeforeEach
     void setUp() {
+
         MockitoAnnotations.openMocks(this);
+
     }
 
     @Test
@@ -65,6 +67,7 @@ class CustomerControllerTest {
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("Customer created", response.getBody());
         verify(customerService, times(1)).createCustomer(customerRequest);
+
     }
 
     @Test
@@ -79,6 +82,7 @@ class CustomerControllerTest {
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("Address added successfully", response.getBody());
         verify(customerService, times(1)).addAddressToCustomer(customerId, addressRequest);
+
     }
 
     @Test
@@ -93,6 +97,7 @@ class CustomerControllerTest {
         assertEquals(400, response.getStatusCodeValue());
         assertEquals("Error adding address", response.getBody());
         verify(customerService, times(1)).addAddressToCustomer(customerId, addressRequest);
+
     }
 
     @Test
@@ -111,5 +116,6 @@ class CustomerControllerTest {
         assertEquals(1, addresses.size());
         verify(customerService, times(1)).getAllAddresses(customerId);
         verify(addressMapper, times(1)).toDTO(customerAddress);
+
     }
 }

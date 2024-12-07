@@ -44,4 +44,5 @@ public class DeliveryOption {
     private String type;
     private Double price;
     private Long estimatedDeliveryTime;
+
 }

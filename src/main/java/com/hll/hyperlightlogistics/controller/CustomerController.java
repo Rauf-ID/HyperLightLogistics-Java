@@ -62,11 +62,13 @@ public class CustomerController {
     public ResponseEntity<String> addAddressToCustomer(
             @PathVariable Long customerId,
             @RequestBody AddressDTO addressRequest) {
+
         try {
             customerService.addAddressToCustomer(customerId, addressRequest);
             return ResponseEntity.ok("Address added successfully");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+
         }
     }
 
