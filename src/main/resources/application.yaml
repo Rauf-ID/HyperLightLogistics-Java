@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: HyperLightLogistics
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hyperlightlogistics
+    username: postgres
+    password: pass
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: group_id
+      auto-offset-reset: earliest
+#      Uncomment the lines below if needed
+#      enable-auto-commit: false
+#      max-poll-records: 5
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+
+grpc:
+  server:
+    host: localhost
+    port: 50051
