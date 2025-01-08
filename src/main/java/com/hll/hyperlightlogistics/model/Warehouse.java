@@ -29,6 +29,8 @@ import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "warehouses")
 @Data
@@ -44,4 +46,6 @@ public class Warehouse {
     private String location;
     private String type;
     private String status;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
 }
