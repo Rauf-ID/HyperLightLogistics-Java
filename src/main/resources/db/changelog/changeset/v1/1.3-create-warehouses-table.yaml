@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.3
+      author: Rauf Agaguliev
+      changes:
+        - createSequence:
+            sequenceName: "warehouses_sequence"
+            startValue: 1
+            incrementBy: 1
+        - createTable:
+            tableName: "warehouses"
+            columns:
+              - column:
+                  name: "id"
+                  type: "BIGINT"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  autoIncrement: false
+                  defaultValueComputed: "nextval('warehouses_sequence')"
+              - column:
+                  name: "location"
+                  type: "VARCHAR(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "type"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "status"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "latitude"
+                  type: "DECIMAL(10, 8)"
+              - column:
+                  name: "longitude"
+                  type: "DECIMAL(10, 8)"

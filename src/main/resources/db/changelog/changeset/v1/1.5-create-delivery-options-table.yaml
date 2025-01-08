@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.5
+      author: Rauf Agaguliev
+      changes:
+        - createSequence:
+            sequenceName: "delivery_options_sequence"
+            startValue: 1
+            incrementBy: 1
+        - createTable:
+            tableName: "delivery_options"
+            columns:
+              - column:
+                  name: "id"
+                  type: "BIGINT"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  autoIncrement: false
+                  defaultValueComputed: "nextval('delivery_options_sequence')"
+              - column:
+                  name: "type"
+                  type: "VARCHAR(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "price"
+                  type: "DOUBLE PRECISION"
+              - column:
+                  name: "estimated_delivery_time"
+                  type: "BIGINT"

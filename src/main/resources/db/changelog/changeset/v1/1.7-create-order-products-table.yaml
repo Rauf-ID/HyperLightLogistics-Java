@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.6
+      author: Rauf Agaguliev
+      changes:
+        - createTable:
+            tableName: "order_products"
+            columns:
+              - column:
+                  name: "order_id"
+                  type: "BIGINT"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "product_id"
+                  type: "BIGINT"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "quantity"
+                  type: "INTEGER"
+        - addForeignKeyConstraint:
+            baseTableName: "order_products"
+            baseColumnNames: "order_id"
+            referencedTableName: "orders"
+            referencedColumnNames: "id"
+            constraintName: "fk_order_products_orders_id"
+        - addForeignKeyConstraint:
+            baseTableName: "order_products"
+            baseColumnNames: "product_id"
+            referencedTableName: "products"
+            referencedColumnNames: "id"
+            constraintName: "fk_order_products_products_id"
