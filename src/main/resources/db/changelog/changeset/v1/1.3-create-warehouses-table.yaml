@@ -31,7 +31,7 @@ databaseChangeLog:
                   type: "VARCHAR(255)"
               - column:
                   name: "latitude"
-                  type: "DECIMAL(10, 8)"
+                  type: "DECIMAL(11, 8)"
               - column:
                   name: "longitude"
-                  type: "DECIMAL(10, 8)"
+                  type: "DECIMAL(12, 8)"
