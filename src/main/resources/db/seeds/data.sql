@@ -15,3 +15,17 @@ INSERT INTO public.inventory (quantity, id, product_id, warehouse_id) VALUES (50
 INSERT INTO public.inventory (quantity, id, product_id, warehouse_id) VALUES (1000, 5, 3, 5);
 INSERT INTO public.inventory (quantity, id, product_id, warehouse_id) VALUES (1000, 7, 3, 3);
 INSERT INTO public.inventory (quantity, id, product_id, warehouse_id) VALUES (1000, 8, 3, 6);
+
+INSERT INTO drones (id, battery_level, capacity, load, next_available_time, status, warehouse_id)
+VALUES
+(1, 85.5, 10.0, 0.0, '2024-11-25 10:00:00', 'available', 5),
+(2, 50.0, 8.0, 4.0, '2024-11-25 12:00:00', 'available', 5),
+(3, 30.0, 12.0, 6.0, '2024-11-25 15:00:00', 'on_way', 5),
+(4, 90.0, 15.0, 0.0, '2024-11-25 09:00:00', 'available', 5);
+
+INSERT INTO vans (id, capacity, load, next_available_time, status, warehouse_id)
+VALUES
+(1, 10.0, 0.0, '2024-11-25 10:00:00', 'available', 5),
+(2, 8.0, 4.0, '2024-11-25 12:00:00', 'available', 5),
+(3, 12.0, 6.0, '2024-11-25 15:00:00', 'in_flight',5),
+(4, 15.0, 0.0, '2024-11-25 09:00:00', 'available', 5);
