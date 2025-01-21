@@ -21,7 +21,7 @@ package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.dto.AddressDTO;
 import com.hll.hyperlightlogistics.dto.CustomerRequestDTO;
-import com.hll.hyperlightlogistics.exceptionHandling.DatabaseException;
+import com.hll.hyperlightlogistics.exceptions.DatabaseException;
 import com.hll.hyperlightlogistics.model.CustomerAddress;
 import com.hll.hyperlightlogistics.model.Customer;
 import com.hll.hyperlightlogistics.repository.CustomerAddressesRepository;
@@ -41,7 +41,6 @@ public class CustomerService {
     @Autowired
     private CustomerAddressesRepository addressesRepository;
 
-    @Transactional
     public String createCustomer(CustomerRequestDTO customerRequest) {
 
         Customer customer = new Customer();
@@ -56,6 +55,7 @@ public class CustomerService {
         }
     }
 
+    @Transactional
     public void addAddressToCustomer(Long customerId, AddressDTO addressRequest) {
 
         Customer customer = customerRepository.findById(customerId)
@@ -73,7 +73,13 @@ public class CustomerService {
         customerAddresses.add(newCustomerAddresses);
         customer.setCustomerAddresses(customerAddresses);
 
-        customerRepository.save(customer);
+
+        try {
+            customerRepository.save(customer);
+        } catch (Exception e) {
+            throw new DatabaseException("Failed to add address to the customer", e);
+
+        }
 
     }
 

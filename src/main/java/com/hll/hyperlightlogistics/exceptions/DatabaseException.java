@@ -17,7 +17,7 @@
  * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.exceptionHandling;
+package com.hll.hyperlightlogistics.exceptions;
 
 public class DatabaseException extends RuntimeException {
 

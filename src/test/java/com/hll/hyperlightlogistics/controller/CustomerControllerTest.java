@@ -17,9 +17,8 @@
  * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics;
+package com.hll.hyperlightlogistics.controller;
 
-import com.hll.hyperlightlogistics.controller.CustomerController;
 import com.hll.hyperlightlogistics.dto.AddressDTO;
 import com.hll.hyperlightlogistics.dto.CustomerRequestDTO;
 import com.hll.hyperlightlogistics.mapper.AddressMapper;
@@ -35,7 +34,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 class CustomerControllerTest {

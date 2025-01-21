@@ -20,7 +20,7 @@
 package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.dto.ProductRequestDTO;
-import com.hll.hyperlightlogistics.exceptionHandling.DatabaseException;
+import com.hll.hyperlightlogistics.exceptions.DatabaseException;
 import com.hll.hyperlightlogistics.model.Product;
 import com.hll.hyperlightlogistics.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

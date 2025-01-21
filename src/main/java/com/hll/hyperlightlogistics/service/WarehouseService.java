@@ -20,9 +20,10 @@
 package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.dto.WarehouseRequestDTO;
-import com.hll.hyperlightlogistics.exceptionHandling.DatabaseException;
+import com.hll.hyperlightlogistics.exceptions.DatabaseException;
 import com.hll.hyperlightlogistics.model.Warehouse;
 import com.hll.hyperlightlogistics.repository.WarehouseRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

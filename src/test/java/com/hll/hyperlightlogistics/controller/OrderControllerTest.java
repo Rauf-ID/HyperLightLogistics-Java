@@ -17,9 +17,8 @@
  * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics;
+package com.hll.hyperlightlogistics.controller;
 
-import com.hll.hyperlightlogistics.controller.OrderController;
 import com.hll.hyperlightlogistics.dto.ProductDTO;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.model.Product;

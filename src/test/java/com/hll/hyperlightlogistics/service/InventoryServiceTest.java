@@ -1,4 +1,4 @@
-package com.hll.hyperlightlogistics.serviceTests;
+package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.model.Inventory;
 import com.hll.hyperlightlogistics.model.Product;
@@ -6,7 +6,6 @@ import com.hll.hyperlightlogistics.model.Warehouse;
 import com.hll.hyperlightlogistics.repository.InventoryRepository;
 import com.hll.hyperlightlogistics.repository.ProductRepository;
 import com.hll.hyperlightlogistics.repository.WarehouseRepository;
-import com.hll.hyperlightlogistics.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

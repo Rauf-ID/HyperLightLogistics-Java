@@ -19,7 +19,7 @@
 
 package com.hll.hyperlightlogistics.service;
 
-import com.hll.hyperlightlogistics.exceptionHandling.DatabaseException;
+import com.hll.hyperlightlogistics.exceptions.DatabaseException;
 import com.hll.hyperlightlogistics.model.Inventory;
 import com.hll.hyperlightlogistics.model.Product;
 import com.hll.hyperlightlogistics.model.Warehouse;

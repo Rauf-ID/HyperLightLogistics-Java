@@ -17,8 +17,9 @@
  * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.exceptionHandling;
+package com.hll.hyperlightlogistics.handlers;
 
+import com.hll.hyperlightlogistics.exceptions.DatabaseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -17,11 +17,10 @@
  * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics;
+package com.hll.hyperlightlogistics.controller;
 
-import com.hll.hyperlightlogistics.controller.ProductController;
-import com.hll.hyperlightlogistics.dto.ProductRequestDTO;
-import com.hll.hyperlightlogistics.service.ProductService;
+import com.hll.hyperlightlogistics.dto.WarehouseRequestDTO;
+import com.hll.hyperlightlogistics.service.WarehouseService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -32,13 +31,13 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class ProductControllerTest {
+public class WarehouseControllerTest {
 
     @InjectMocks
-    private ProductController productController;
+    private WarehouseController warehouseController;
 
     @Mock
-    private ProductService productService;
+    private WarehouseService warehouseService;
 
     @BeforeEach
     void setUp() {
@@ -46,32 +45,33 @@ public class ProductControllerTest {
     }
 
     @Test
-    void testCreateProduct() {
+    void testCreateWarehouse() {
 
-        ProductRequestDTO productRequest = new ProductRequestDTO();
-        when(productService.createProduct(productRequest)).thenReturn("Product created");
+        WarehouseRequestDTO warehouseRequest = new WarehouseRequestDTO();
+        when(warehouseService.createWarehouse(warehouseRequest)).thenReturn("Warehouse created");
 
-        ResponseEntity<String> response = productController.createProduct(productRequest);
+        ResponseEntity<String> response = warehouseController.createWarehouse(warehouseRequest);
 
         assertEquals(200, response.getStatusCodeValue());
-        assertEquals("Product created", response.getBody());
-        verify(productService, times(1)).createProduct(productRequest);
+        assertEquals("Warehouse created", response.getBody());
+        verify(warehouseService, times(1)).createWarehouse(warehouseRequest);
 
     }
 
     @Test
-    void createProduct_ShouldHandleExceptions() {
+    void createWarehouse_ShouldHandleExceptions() {
 
-        ProductRequestDTO productRequest = new ProductRequestDTO();
-        productRequest.setName("Invalid Product");
+        WarehouseRequestDTO warehouseRequest = new WarehouseRequestDTO();
+        warehouseRequest.setType("Abandoned");
 
-        when(productService.createProduct(any(ProductRequestDTO.class))).thenThrow(new RuntimeException("Service error"));
+        when(warehouseService.createWarehouse(any(WarehouseRequestDTO.class))).thenThrow(new RuntimeException("Service error"));
 
         try {
-            productController.createProduct(productRequest);
+            warehouseController.createWarehouse(warehouseRequest);
         } catch (Exception e) {
             assertEquals("Service error", e.getMessage());
         }
 
     }
+
 }

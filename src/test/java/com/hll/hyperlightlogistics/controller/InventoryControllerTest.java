@@ -17,9 +17,8 @@
  * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics;
+package com.hll.hyperlightlogistics.controller;
 
-import com.hll.hyperlightlogistics.controller.InventoryController;
 import com.hll.hyperlightlogistics.dto.InventoryRequestDTO;
 import com.hll.hyperlightlogistics.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;

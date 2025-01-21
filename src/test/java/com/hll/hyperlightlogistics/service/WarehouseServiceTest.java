@@ -17,13 +17,12 @@
  * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.serviceTests;
+package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.dto.WarehouseRequestDTO;
-import com.hll.hyperlightlogistics.exceptionHandling.DatabaseException;
+import com.hll.hyperlightlogistics.exceptions.DatabaseException;
 import com.hll.hyperlightlogistics.model.Warehouse;
 import com.hll.hyperlightlogistics.repository.WarehouseRepository;
-import com.hll.hyperlightlogistics.service.WarehouseService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

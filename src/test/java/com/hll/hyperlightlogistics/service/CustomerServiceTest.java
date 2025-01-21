@@ -17,16 +17,15 @@
  * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.serviceTests;
+package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.dto.AddressDTO;
 import com.hll.hyperlightlogistics.dto.CustomerRequestDTO;
-import com.hll.hyperlightlogistics.exceptionHandling.DatabaseException;
+import com.hll.hyperlightlogistics.exceptions.DatabaseException;
 import com.hll.hyperlightlogistics.model.Customer;
 import com.hll.hyperlightlogistics.model.CustomerAddress;
 import com.hll.hyperlightlogistics.repository.CustomerAddressesRepository;
 import com.hll.hyperlightlogistics.repository.CustomerRepository;
-import com.hll.hyperlightlogistics.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
