@@ -2,6 +2,16 @@ databaseChangeLog:
   - changeSet:
       id: 1.1
       author: Rauf Agaguliev
+      preConditions:
+        onFail: MARK_RAN
+        onError: HALT
+        preConditions:
+          - not:
+              sequenceExists:
+                sequenceName: "customers_sequence"
+          - not:
+              tableExists:
+                tableName: "customers"
       changes:
         - createSequence:
             sequenceName: "customers_sequence"

@@ -2,6 +2,13 @@ databaseChangeLog:
   - changeSet:
       id: 1.6
       author: Rauf Agaguliev
+      preConditions:
+        onFail: MARK_RAN
+        onError: HALT
+        preConditions:
+          - not:
+              tableExists:
+                tableName: "order_products"
       changes:
         - createTable:
             tableName: "order_products"
