@@ -19,19 +19,18 @@
 
 package com.hll.hyperlightlogistics.mapper;
 
-import com.hll.hyperlightlogistics.dto.AddressDTO;
-import com.hll.hyperlightlogistics.model.CustomerAddress;
+import com.hll.hyperlightlogistics.dto.WarehouseRequestDTO;
+import com.hll.hyperlightlogistics.model.Warehouse;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface AddressMapper {
+public interface WarehouseMapper {
 
-    AddressMapper INSTANCE = Mappers.getMapper(AddressMapper.class);
+    WarehouseMapper INSTANCE = Mappers.getMapper(WarehouseMapper.class);
 
-    CustomerAddress toEntity(AddressDTO addressDTO);
+    Warehouse toEntity(WarehouseRequestDTO warehouseRequestDTO);
 
-    AddressDTO toDTO(CustomerAddress addressEntity);
-
+    WarehouseRequestDTO toDto(Warehouse warehouseEntity);
 
 }

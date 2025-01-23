@@ -21,9 +21,9 @@ package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.dto.WarehouseRequestDTO;
 import com.hll.hyperlightlogistics.exceptions.DatabaseException;
+import com.hll.hyperlightlogistics.mapper.WarehouseMapper;
 import com.hll.hyperlightlogistics.model.Warehouse;
 import com.hll.hyperlightlogistics.repository.WarehouseRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +35,7 @@ public class WarehouseService {
 
     public String createWarehouse(WarehouseRequestDTO warehouseRequest) {
 
-        Warehouse warehouse = new Warehouse();
-        warehouse.setLongitude(warehouseRequest.getLongitude());
-        warehouse.setLatitude(warehouseRequest.getLatitude());
-        warehouse.setType(warehouseRequest.getType());
-        warehouse.setStatus(warehouseRequest.getStatus());
+        Warehouse warehouse = WarehouseMapper.INSTANCE.toEntity(warehouseRequest);
 
         try{
             Warehouse savedWarehouse = warehouseRepository.save(warehouse);

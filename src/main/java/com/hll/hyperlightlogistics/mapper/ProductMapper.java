@@ -17,21 +17,20 @@
  * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.dto;
+package com.hll.hyperlightlogistics.mapper;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.hll.hyperlightlogistics.dto.ProductRequestDTO;
+import com.hll.hyperlightlogistics.model.Product;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class AddressDTO {
+@Mapper
+public interface ProductMapper {
 
-    private String country;
-    private String state;
-    private String city;
-    private String street;
-    private String postcode;
+    ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
+
+    Product toEntity(ProductRequestDTO productDTO);
+
+    ProductRequestDTO toDto(Product addressEntity);
 
 }

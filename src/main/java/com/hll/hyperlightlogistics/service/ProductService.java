@@ -21,6 +21,7 @@ package com.hll.hyperlightlogistics.service;
 
 import com.hll.hyperlightlogistics.dto.ProductRequestDTO;
 import com.hll.hyperlightlogistics.exceptions.DatabaseException;
+import com.hll.hyperlightlogistics.mapper.ProductMapper;
 import com.hll.hyperlightlogistics.model.Product;
 import com.hll.hyperlightlogistics.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,7 @@ public class ProductService {
 
     public String createProduct(ProductRequestDTO productRequest) {
 
-        Product product = new Product();
-        product.setName(productRequest.getName());
-        product.setDescription(productRequest.getDescription());
-        product.setPrice(productRequest.getPrice());
-        product.setCategory(productRequest.getCategory());
-        product.setWeight(productRequest.getWeight());
-        product.setLength(productRequest.getLength());
-        product.setWidth(productRequest.getWidth());
-        product.setHeight(productRequest.getHeight());
+        Product product = ProductMapper.INSTANCE.toEntity(productRequest);
 
         try {
             Product savedProduct = productRepository.save(product);
