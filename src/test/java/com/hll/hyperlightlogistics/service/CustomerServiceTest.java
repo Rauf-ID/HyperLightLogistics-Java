@@ -112,7 +112,6 @@ class CustomerServiceTest {
 
         customerService.addAddressToCustomer(customerId, addressRequest);
 
-        // Assert
         assertNotNull(customer.getCustomerAddresses());
         assertEquals(1, customer.getCustomerAddresses().size());
         CustomerAddress address = customer.getCustomerAddresses().get(0);

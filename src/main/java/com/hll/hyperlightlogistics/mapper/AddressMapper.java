@@ -22,15 +22,17 @@ package com.hll.hyperlightlogistics.mapper;
 import com.hll.hyperlightlogistics.dto.AddressDTO;
 import com.hll.hyperlightlogistics.model.CustomerAddress;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface AddressMapper {
 
     AddressMapper INSTANCE = Mappers.getMapper(AddressMapper.class);
 
     CustomerAddress toEntity(AddressDTO addressDTO);
 
+    @Mapping(target = "id", ignore = true)
     AddressDTO toDTO(CustomerAddress addressEntity);
 
 
