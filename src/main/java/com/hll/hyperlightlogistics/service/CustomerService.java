@@ -64,6 +64,7 @@ public class CustomerService {
 
         CustomerAddress newCustomerAddresses = AddressMapper.INSTANCE.toEntity(addressRequest);
 
+        newCustomerAddresses.setCustomer(customer);
         List<CustomerAddress> customerAddresses = customer.getCustomerAddresses();
         customerAddresses.add(newCustomerAddresses);
         customer.setCustomerAddresses(customerAddresses);

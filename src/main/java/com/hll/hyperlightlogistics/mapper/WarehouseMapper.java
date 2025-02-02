@@ -30,9 +30,9 @@ public interface WarehouseMapper {
 
     WarehouseMapper INSTANCE = Mappers.getMapper(WarehouseMapper.class);
 
+    @Mapping(target = "id", ignore = true)
     Warehouse toEntity(WarehouseRequestDTO warehouseRequestDTO);
 
-    @Mapping(target = "id", ignore = true)
     WarehouseRequestDTO toDto(Warehouse warehouseEntity);
 
 }

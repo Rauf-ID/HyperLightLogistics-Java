@@ -32,6 +32,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -106,6 +107,7 @@ class CustomerServiceTest {
 
         Customer customer = new Customer();
         customer.setId(customerId);
+        customer.setCustomerAddresses(new ArrayList<>());
 
         when(customerRepository.findById(customerId)).thenReturn(java.util.Optional.of(customer));
         when(customerRepository.save(customer)).thenReturn(customer);
@@ -114,7 +116,7 @@ class CustomerServiceTest {
 
         assertNotNull(customer.getCustomerAddresses());
         assertEquals(1, customer.getCustomerAddresses().size());
-        CustomerAddress address = customer.getCustomerAddresses().get(0);
+        CustomerAddress address = customer.getCustomerAddresses().getFirst();
         assertEquals("Country", address.getCountry());
         assertEquals("State", address.getState());
         assertEquals("City", address.getCity());

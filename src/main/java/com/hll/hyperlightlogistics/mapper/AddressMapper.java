@@ -30,9 +30,10 @@ public interface AddressMapper {
 
     AddressMapper INSTANCE = Mappers.getMapper(AddressMapper.class);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "customer", ignore = true)
     CustomerAddress toEntity(AddressDTO addressDTO);
 
-    @Mapping(target = "id", ignore = true)
     AddressDTO toDTO(CustomerAddress addressEntity);
 
 
