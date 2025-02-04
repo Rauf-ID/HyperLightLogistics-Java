@@ -78,9 +78,14 @@ public class CustomerService {
 
     }
 
-    public List<CustomerAddress> getAllAddresses(Long customerId){
+    public List<CustomerAddress> getAllAddresses(Long customerId) {
 
-        return addressesRepository.findByCustomerId(customerId);
+        try {
+            return addressesRepository.findByCustomerId(customerId);
+        } catch (Exception e) {
+            throw new DatabaseException("Failed to fetch addresses for customer ID: " + customerId, e);
+
+        }
 
     }
 }

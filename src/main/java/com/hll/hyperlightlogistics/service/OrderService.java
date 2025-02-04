@@ -19,6 +19,7 @@
 
 package com.hll.hyperlightlogistics.service;
 
+import com.hll.hyperlightlogistics.exceptions.DatabaseException;
 import com.hll.hyperlightlogistics.kafka.KafkaProducer;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.repository.CustomerRepository;
@@ -74,7 +75,12 @@ public class OrderService {
 
     public List<Order> getOrdersByCustomerId(Long customerId) {
 
-        return orderRepository.findByCustomerId(customerId);
+        try {
+            return orderRepository.findByCustomerId(customerId);
+        }catch (Exception e){
+            throw new DatabaseException("Failed to fetch addresses for customer ID: " + customerId, e);
+
+        }
 
     }
 
