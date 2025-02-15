@@ -25,7 +25,6 @@ import com.hll.hyperlightlogistics.mapper.AddressMapper;
 import com.hll.hyperlightlogistics.model.CustomerAddress;
 import com.hll.hyperlightlogistics.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,9 +37,7 @@ import java.util.stream.Collectors;
 public class CustomerController {
 
     private final CustomerService customerService;
-    
-    @Autowired
-    private AddressMapper addressMapper;
+    private final AddressMapper addressMapper;
 
     @PostMapping("/")
     public ResponseEntity<String> createCustomer(@RequestBody CustomerRequestDTO customerRequest) {

@@ -21,8 +21,6 @@ package com.hll.hyperlightlogistics.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hll.hyperlightlogistics.dto.ProductRequestDTO;
-import com.hll.hyperlightlogistics.mapper.ProductMapper;
-import com.hll.hyperlightlogistics.repository.ProductRepository;
 import com.hll.hyperlightlogistics.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -57,7 +55,7 @@ public class MockMVCProductControllerTest {
 
         when(productService.createProduct(Mockito.any())).thenReturn("Product created successfully");
 
-        mockMvc.perform(post("/api/products/createProduct")
+        mockMvc.perform(post("/api/products/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(productRequest)))
                 .andExpect(status().isOk())

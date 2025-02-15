@@ -49,7 +49,7 @@ public class OrderController {
 
     }
 
-    @PostMapping("/{orderId}/initiate-delivery")
+    @PostMapping("/{orderId}/delivery")
     public ResponseEntity<String> initiateDelivery(@PathVariable Long orderId) {
 
         orderService.initiateDelivery(orderId);

@@ -57,7 +57,7 @@ public class MockMVCInventoryControllerTest {
         when(inventoryService.addProductToInventory(1L, 2L, 100))
                 .thenReturn("Product added successfully");
 
-        mockMvc.perform(post("/api/inventory/addProduct")
+        mockMvc.perform(post("/api/inventory/product")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
@@ -76,11 +76,12 @@ public class MockMVCInventoryControllerTest {
         when(inventoryService.addProductToInventory(1L, 2L, 100))
                 .thenThrow(new RuntimeException("An unexpected error occurred. Please try again later."));
 
-        mockMvc.perform(post("/api/inventory/addProduct")
+        mockMvc.perform(post("/api/inventory/product")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isInternalServerError())
                 .andExpect(content().string("An unexpected error occurred. Please try again later."));
 
     }
+
 }

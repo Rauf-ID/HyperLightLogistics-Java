@@ -19,9 +19,7 @@
 
 package com.hll.hyperlightlogistics.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hll.hyperlightlogistics.dto.ProductRequestDTO;
-import com.hll.hyperlightlogistics.repository.ProductRepository;
 import com.hll.hyperlightlogistics.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,13 +32,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @PostMapping("/createProduct")
+    @PostMapping("/")
     public ResponseEntity<String> createProduct(@RequestBody ProductRequestDTO productRequest) {
 
         String response = productService.createProduct(productRequest);

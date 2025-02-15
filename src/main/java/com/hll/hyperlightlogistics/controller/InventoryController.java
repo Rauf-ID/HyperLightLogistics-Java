@@ -35,7 +35,7 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
-    @PostMapping("/addProduct")
+    @PostMapping("/product")
     public ResponseEntity<String> addProductToInventory(@RequestBody InventoryRequestDTO request) {
 
         String response = inventoryService.addProductToInventory(

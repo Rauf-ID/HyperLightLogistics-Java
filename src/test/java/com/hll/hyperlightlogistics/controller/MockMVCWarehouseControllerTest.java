@@ -21,8 +21,6 @@ package com.hll.hyperlightlogistics.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hll.hyperlightlogistics.dto.WarehouseRequestDTO;
-import com.hll.hyperlightlogistics.mapper.WarehouseMapper;
-import com.hll.hyperlightlogistics.repository.WarehouseRepository;
 import com.hll.hyperlightlogistics.service.WarehouseService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -62,13 +60,12 @@ public class MockMVCWarehouseControllerTest {
 
         when(warehouseService.createWarehouse(Mockito.any())).thenReturn("Warehouse created");
 
-        mockMvc.perform(post("/api/warehouses/createWarehouse")
+        mockMvc.perform(post("/api/warehouses/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(warehouseRequest)))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Warehouse created"));
 
     }
-
 
 }

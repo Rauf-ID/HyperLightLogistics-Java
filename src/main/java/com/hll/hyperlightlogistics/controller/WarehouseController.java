@@ -19,9 +19,7 @@
 
 package com.hll.hyperlightlogistics.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hll.hyperlightlogistics.dto.WarehouseRequestDTO;
-import com.hll.hyperlightlogistics.repository.WarehouseRepository;
 import com.hll.hyperlightlogistics.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,13 +32,7 @@ public class WarehouseController {
     @Autowired
     private WarehouseService warehouseService;
 
-    @Autowired
-    private WarehouseRepository warehouseRepository;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @PostMapping("/createWarehouse")
+    @PostMapping("/")
     public ResponseEntity<String> createWarehouse(@RequestBody WarehouseRequestDTO warehouseRequest) {
 
         String response = warehouseService.createWarehouse(warehouseRequest);

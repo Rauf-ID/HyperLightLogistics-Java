@@ -19,7 +19,6 @@
 
 package com.hll.hyperlightlogistics.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.model.Product;
 import com.hll.hyperlightlogistics.service.OrderService;
@@ -42,9 +41,6 @@ public class MockMVCOrderControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @MockBean
     private OrderService orderService;
@@ -69,7 +65,7 @@ public class MockMVCOrderControllerTest {
     @Test
     void testInitiateDelivery() throws Exception {
 
-        mockMvc.perform(post("/api/orders/1/initiate-delivery"))
+        mockMvc.perform(post("/api/orders/1/delivery"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Delivery initiated"));
 
@@ -108,4 +104,5 @@ public class MockMVCOrderControllerTest {
                 .andExpect(jsonPath("$[1].price").value(200.00));
 
     }
+
 }
