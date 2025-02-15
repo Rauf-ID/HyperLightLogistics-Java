@@ -64,7 +64,7 @@ class CustomerControllerTest {
 
         ResponseEntity<String> response = customerController.createCustomer(customerRequest);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertEquals("Customer created", response.getBody());
         verify(customerService, times(1)).createCustomer(customerRequest);
 
@@ -79,7 +79,7 @@ class CustomerControllerTest {
 
         ResponseEntity<String> response = customerController.addAddressToCustomer(customerId, addressRequest);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertEquals("Address added successfully", response.getBody());
         verify(customerService, times(1)).addAddressToCustomer(customerId, addressRequest);
 
@@ -94,7 +94,7 @@ class CustomerControllerTest {
 
         ResponseEntity<String> response = customerController.addAddressToCustomer(customerId, addressRequest);
 
-        assertEquals(400, response.getStatusCodeValue());
+        assertEquals(400, response.getStatusCode().value());
         assertEquals("Error adding address", response.getBody());
         verify(customerService, times(1)).addAddressToCustomer(customerId, addressRequest);
 
@@ -110,7 +110,8 @@ class CustomerControllerTest {
         when(customerService.getAllAddresses(customerId)).thenReturn(Collections.singletonList(customerAddress));
         when(addressMapper.toDTO(customerAddress)).thenReturn(addressDTO);
 
-        List<AddressDTO> addresses = customerController.getAllAddresses(customerId);
+        ResponseEntity<List<AddressDTO>> response = customerController.getAllAddresses(customerId);
+        List<AddressDTO> addresses = response.getBody();
 
         assertNotNull(addresses);
         assertEquals(1, addresses.size());

@@ -23,33 +23,26 @@ import com.hll.hyperlightlogistics.dto.AddressDTO;
 import com.hll.hyperlightlogistics.dto.CustomerRequestDTO;
 import com.hll.hyperlightlogistics.mapper.AddressMapper;
 import com.hll.hyperlightlogistics.model.CustomerAddress;
-import com.hll.hyperlightlogistics.repository.CustomerRepository;
 import com.hll.hyperlightlogistics.service.CustomerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/customers")
+@RequiredArgsConstructor
 public class CustomerController {
 
-    @Autowired
-    private CustomerService customerService;
-
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
+    private final CustomerService customerService;
+    
     @Autowired
     private AddressMapper addressMapper;
 
-    @PostMapping("/createCustomer")
+    @PostMapping("/")
     public ResponseEntity<String> createCustomer(@RequestBody CustomerRequestDTO customerRequest) {
 
         String response = customerService.createCustomer(customerRequest);
@@ -58,7 +51,7 @@ public class CustomerController {
 
     }
 
-    @PostMapping("/{customerId}/addAddress")
+    @PostMapping("/{customerId}/addresses")
     public ResponseEntity<String> addAddressToCustomer(
             @PathVariable Long customerId,
             @RequestBody AddressDTO addressRequest) {
@@ -72,13 +65,15 @@ public class CustomerController {
         }
     }
 
-    @GetMapping("/getAllAddresses/{customerId}")
-    public List<AddressDTO> getAllAddresses(@PathVariable Long customerId){
+    @GetMapping("/{customerId}/addresses")
+    public ResponseEntity<List<AddressDTO>> getAllAddresses(@PathVariable Long customerId) {
 
         List<CustomerAddress> addressList = customerService.getAllAddresses(customerId);
-        return addressList.stream()
+
+        List<AddressDTO> addressDTOList = addressList.stream()
                 .map(addressMapper::toDTO)
                 .collect(Collectors.toList());
 
+        return ResponseEntity.ok(addressDTOList); // Упаковываем результат в ResponseEntity
     }
 }
