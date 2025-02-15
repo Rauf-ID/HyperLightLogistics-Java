@@ -51,12 +51,6 @@ public class MockMVCWarehouseControllerTest {
     @MockBean
     private WarehouseService warehouseService;
 
-    @MockBean
-    private WarehouseMapper warehouseMapper;
-
-    @MockBean
-    private WarehouseRepository warehouseRepository;
-
     @Test
     void testCreateWarehouse() throws Exception {
 

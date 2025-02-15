@@ -55,7 +55,7 @@ public class OrderControllerTest {
 
         ResponseEntity<Order> response = orderController.createOrder(1L,1L,4);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertEquals(new Order(), response.getBody());
         verify(orderService, times(1)).createOrder();
 
@@ -66,7 +66,7 @@ public class OrderControllerTest {
 
         ResponseEntity<String> response = orderController.initiateDelivery(1L);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertEquals("Delivery initiated", response.getBody());
         verify(orderService, times(1)).initiateDelivery(1L);
 
@@ -99,12 +99,13 @@ public class OrderControllerTest {
 
         ResponseEntity<List<ProductDTO>> response = orderController.getOrderHistory(customerId);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
 
         List<ProductDTO> productList = response.getBody();
+        assert productList != null;
         assertEquals(2, productList.size());
 
-        ProductDTO productDTO1 = productList.get(0);
+        ProductDTO productDTO1 = productList.getFirst();
         assertEquals("Product 1", productDTO1.getName());
         assertEquals("Description 1", productDTO1.getDescription());
         assertEquals(100.0, productDTO1.getPrice());

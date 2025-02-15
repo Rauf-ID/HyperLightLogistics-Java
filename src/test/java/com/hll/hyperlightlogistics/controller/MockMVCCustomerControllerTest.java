@@ -24,7 +24,6 @@ import com.hll.hyperlightlogistics.dto.AddressDTO;
 import com.hll.hyperlightlogistics.dto.CustomerRequestDTO;
 import com.hll.hyperlightlogistics.mapper.AddressMapper;
 import com.hll.hyperlightlogistics.model.CustomerAddress;
-import com.hll.hyperlightlogistics.repository.CustomerRepository;
 import com.hll.hyperlightlogistics.service.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -57,9 +56,6 @@ public class MockMVCCustomerControllerTest {
     @MockBean
     private AddressMapper addressMapper;
 
-    @MockBean
-    private CustomerRepository customerRepository;
-
     @Test
     void testCreateCustomer() throws Exception {
 
@@ -68,7 +64,7 @@ public class MockMVCCustomerControllerTest {
 
         when(customerService.createCustomer(Mockito.any())).thenReturn("Customer created successfully");
 
-        mockMvc.perform(post("/api/customers/createCustomer")
+        mockMvc.perform(post("/api/customers/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(customerRequest)))
                 .andExpect(status().isOk())
@@ -81,7 +77,7 @@ public class MockMVCCustomerControllerTest {
 
         AddressDTO addressRequest = new AddressDTO("USA", "California", "Los Angeles", "Main Street", "90001");
 
-        mockMvc.perform(post("/api/customers/1/addAddress")
+        mockMvc.perform(post("/api/customers/1/addresses")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(addressRequest)))
                 .andExpect(status().isOk())
@@ -96,7 +92,7 @@ public class MockMVCCustomerControllerTest {
 
         doThrow(new RuntimeException("Customer not found")).when(customerService).addAddressToCustomer(1L, addressRequest);
 
-        mockMvc.perform(post("/api/customers/1/addAddress")
+        mockMvc.perform(post("/api/customers/1/addresses")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(addressRequest)))
                 .andExpect(status().isBadRequest())
@@ -131,7 +127,7 @@ public class MockMVCCustomerControllerTest {
         when(addressMapper.toDTO(address1)).thenReturn(addressDto1);
         when(addressMapper.toDTO(address2)).thenReturn(addressDto2);
 
-        mockMvc.perform(get("/api/customers/getAllAddresses/1")
+        mockMvc.perform(get("/api/customers/1/addresses")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].country").value("USA"))

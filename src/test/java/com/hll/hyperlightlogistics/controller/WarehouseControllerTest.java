@@ -52,7 +52,7 @@ public class WarehouseControllerTest {
 
         ResponseEntity<String> response = warehouseController.createWarehouse(warehouseRequest);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertEquals("Warehouse created", response.getBody());
         verify(warehouseService, times(1)).createWarehouse(warehouseRequest);
 

@@ -55,7 +55,7 @@ public class InventoryControllerTest {
 
         ResponseEntity<String> response = inventoryController.addProductToInventory(inventoryRequest);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertEquals("Product added", response.getBody());
         verify(inventoryService, times(1)).addProductToInventory(1L, 1L, 1);
 

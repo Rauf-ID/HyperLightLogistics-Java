@@ -49,12 +49,6 @@ public class MockMVCProductControllerTest {
     @MockBean
     private ProductService productService;
 
-    @MockBean
-    private ProductMapper productMapper;
-
-    @MockBean
-    private ProductRepository productRepository;
-
     @Test
     void testCreateProduct() throws Exception{
 

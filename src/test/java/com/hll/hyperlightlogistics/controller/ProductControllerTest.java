@@ -52,7 +52,7 @@ public class ProductControllerTest {
 
         ResponseEntity<String> response = productController.createProduct(productRequest);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertEquals("Product created", response.getBody());
         verify(productService, times(1)).createProduct(productRequest);
 
