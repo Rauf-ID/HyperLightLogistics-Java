@@ -74,6 +74,6 @@ public class CustomerController {
                 .map(addressMapper::toDTO)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(addressDTOList); // Упаковываем результат в ResponseEntity
+        return ResponseEntity.ok(addressDTOList);
     }
 }
