@@ -21,7 +21,6 @@ package com.hll.hyperlightlogistics.repository;
 
 import com.hll.hyperlightlogistics.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 import java.util.Optional;
 

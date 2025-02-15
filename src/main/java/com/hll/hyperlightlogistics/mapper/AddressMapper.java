@@ -36,5 +36,4 @@ public interface AddressMapper {
 
     AddressDTO toDTO(CustomerAddress addressEntity);
 
-
 }
