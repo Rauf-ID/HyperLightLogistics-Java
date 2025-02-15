@@ -22,9 +22,6 @@ package com.hll.hyperlightlogistics.service;
 import com.hll.hyperlightlogistics.exceptions.DatabaseException;
 import com.hll.hyperlightlogistics.kafka.KafkaProducer;
 import com.hll.hyperlightlogistics.model.Order;
-import com.hll.hyperlightlogistics.repository.CustomerRepository;
-import com.hll.hyperlightlogistics.repository.DeliveryOptionRepository;
-import com.hll.hyperlightlogistics.repository.InventoryRepository;
 import com.hll.hyperlightlogistics.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,9 +33,6 @@ import java.util.List;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final CustomerRepository customerRepository;
-    private final InventoryRepository inventoryRepository;
-    private final DeliveryOptionRepository deliveryOptionRepository;
     private final KafkaProducer kafkaProducer;
 
     public Order createOrder() {
