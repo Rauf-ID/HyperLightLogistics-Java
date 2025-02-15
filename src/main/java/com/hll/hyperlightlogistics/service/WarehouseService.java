@@ -24,13 +24,13 @@ import com.hll.hyperlightlogistics.exceptions.DatabaseException;
 import com.hll.hyperlightlogistics.mapper.WarehouseMapper;
 import com.hll.hyperlightlogistics.model.Warehouse;
 import com.hll.hyperlightlogistics.repository.WarehouseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class WarehouseService {
 
-    @Autowired
     private WarehouseRepository warehouseRepository;
 
     public String createWarehouse(WarehouseRequestDTO warehouseRequest) {

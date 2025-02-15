@@ -21,7 +21,7 @@ package com.hll.hyperlightlogistics.controller;
 
 import com.hll.hyperlightlogistics.dto.InventoryRequestDTO;
 import com.hll.hyperlightlogistics.service.InventoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,10 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/inventory")
+@RequiredArgsConstructor
 public class InventoryController {
 
-    @Autowired
-    private InventoryService inventoryService;
+
+    private final InventoryService inventoryService;
 
     @PostMapping("/product")
     public ResponseEntity<String> addProductToInventory(@RequestBody InventoryRequestDTO request) {

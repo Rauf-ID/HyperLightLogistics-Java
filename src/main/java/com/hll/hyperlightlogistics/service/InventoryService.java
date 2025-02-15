@@ -27,20 +27,16 @@ import com.hll.hyperlightlogistics.repository.InventoryRepository;
 import com.hll.hyperlightlogistics.repository.ProductRepository;
 import com.hll.hyperlightlogistics.repository.WarehouseRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class InventoryService {
 
-    @Autowired
-    private InventoryRepository inventoryRepository;
-
-    @Autowired
-    private WarehouseRepository warehouseRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
+    private final InventoryRepository inventoryRepository;
+    private final WarehouseRepository warehouseRepository;
+    private final ProductRepository productRepository;
 
     @Transactional
     public String addProductToInventory(Long warehouseId, Long productId, int quantity) {

@@ -26,28 +26,20 @@ import com.hll.hyperlightlogistics.repository.CustomerRepository;
 import com.hll.hyperlightlogistics.repository.DeliveryOptionRepository;
 import com.hll.hyperlightlogistics.repository.InventoryRepository;
 import com.hll.hyperlightlogistics.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
-
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    @Autowired
-    private InventoryRepository inventoryRepository;
-
-    @Autowired
-    private DeliveryOptionRepository deliveryOptionRepository;
-
-    @Autowired
-    private KafkaProducer kafkaProducer;
+    private final OrderRepository orderRepository;
+    private final CustomerRepository customerRepository;
+    private final InventoryRepository inventoryRepository;
+    private final DeliveryOptionRepository deliveryOptionRepository;
+    private final KafkaProducer kafkaProducer;
 
     public Order createOrder() {
         return new Order();

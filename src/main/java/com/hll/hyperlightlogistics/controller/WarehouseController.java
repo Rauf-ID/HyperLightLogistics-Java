@@ -21,16 +21,16 @@ package com.hll.hyperlightlogistics.controller;
 
 import com.hll.hyperlightlogistics.dto.WarehouseRequestDTO;
 import com.hll.hyperlightlogistics.service.WarehouseService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/warehouses")
+@RequiredArgsConstructor
 public class WarehouseController {
 
-    @Autowired
-    private WarehouseService warehouseService;
+    private final WarehouseService warehouseService;
 
     @PostMapping("/")
     public ResponseEntity<String> createWarehouse(@RequestBody WarehouseRequestDTO warehouseRequest) {

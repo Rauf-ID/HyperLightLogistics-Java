@@ -24,14 +24,14 @@ import com.hll.hyperlightlogistics.exceptions.DatabaseException;
 import com.hll.hyperlightlogistics.mapper.ProductMapper;
 import com.hll.hyperlightlogistics.model.Product;
 import com.hll.hyperlightlogistics.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public String createProduct(ProductRequestDTO productRequest) {
 

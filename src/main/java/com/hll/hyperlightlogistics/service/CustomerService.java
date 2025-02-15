@@ -28,19 +28,17 @@ import com.hll.hyperlightlogistics.model.Customer;
 import com.hll.hyperlightlogistics.repository.CustomerAddressesRepository;
 import com.hll.hyperlightlogistics.repository.CustomerRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    @Autowired
-    private CustomerAddressesRepository addressesRepository;
+    private final CustomerRepository customerRepository;
+    private final CustomerAddressesRepository addressesRepository;
 
     public String createCustomer(CustomerRequestDTO customerRequest) {
 

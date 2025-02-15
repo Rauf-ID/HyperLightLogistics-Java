@@ -21,16 +21,17 @@ package com.hll.hyperlightlogistics.controller;
 
 import com.hll.hyperlightlogistics.dto.ProductRequestDTO;
 import com.hll.hyperlightlogistics.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/products")
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+
+    private final ProductService productService;
 
     @PostMapping("/")
     public ResponseEntity<String> createProduct(@RequestBody ProductRequestDTO productRequest) {
