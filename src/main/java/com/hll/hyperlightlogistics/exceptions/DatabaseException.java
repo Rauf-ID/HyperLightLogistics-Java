@@ -14,12 +14,22 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.repository;
+package com.hll.hyperlightlogistics.exceptions;
 
-import com.hll.hyperlightlogistics.model.Customer;
-import org.springframework.data.jpa.repository.JpaRepository;
+public class DatabaseException extends RuntimeException {
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> { }
+    public DatabaseException(String message) {
+
+        super(message);
+
+    }
+
+    public DatabaseException(String message, Throwable cause) {
+
+        super(message, cause);
+
+    }
+}

@@ -14,12 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
 package com.hll.hyperlightlogistics.repository;
 
-import com.hll.hyperlightlogistics.model.Customer;
+import com.hll.hyperlightlogistics.model.CustomerAddress;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> { }
+import java.util.List;
+
+@Repository
+public interface CustomerAddressesRepository extends JpaRepository<CustomerAddress, Long> {
+
+    List<CustomerAddress> findByCustomerId(Long customerId);
+
+}

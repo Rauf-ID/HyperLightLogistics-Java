@@ -19,18 +19,27 @@
 
 package com.hll.hyperlightlogistics.controller;
 
+import com.hll.hyperlightlogistics.dto.ProductDTO;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/orders")
+@RequiredArgsConstructor
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
 
     @PostMapping
     public ResponseEntity<Order> createOrder(
@@ -43,12 +52,29 @@ public class OrderController {
         orderService.requestDeliveryOptions(order);
 
         return ResponseEntity.ok(order);
+
     }
 
-    @PostMapping("/{orderId}/initiate-delivery")
+    @PostMapping("/{orderId}/delivery")
     public ResponseEntity<String> initiateDelivery(@PathVariable Long orderId) {
+
         orderService.initiateDelivery(orderId);
         return ResponseEntity.ok("Delivery initiated");
+
+    }
+
+    @GetMapping("/history/{customerId}")
+    public ResponseEntity<List<ProductDTO>> getOrderHistory(@PathVariable Long customerId) {
+
+        List<Order> orders = orderService.getOrdersByCustomerId(customerId);
+
+        List<ProductDTO> productList = orders.stream()
+                .flatMap(order -> order.getProducts().stream())
+                .map(product -> new ProductDTO(product.getName(), product.getDescription(), product.getPrice()))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(productList);
+
     }
 
 }

@@ -14,42 +14,43 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
 package com.hll.hyperlightlogistics.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Entity
-@Table(name = "warehouses")
+@Table(name = "customer_addresses")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Warehouse {
+public class CustomerAddress {
 
     @Id
-    @SequenceGenerator(name = "warehouses_seq", sequenceName = "warehouses_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "warehouses_seq")
+    @SequenceGenerator(name = "address_seq", sequenceName = "address_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq")
     private Long id;
 
-    @Column(precision = 10, scale = 5)
-    private BigDecimal latitude;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
-    @Column(precision = 10, scale = 5)
-    private BigDecimal longitude;
+    private String country;
+    private String state;
+    private String city;
+    private String street;
+    private String postcode;
 
-    private String type;
-    private String status;
 }

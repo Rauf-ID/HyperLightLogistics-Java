@@ -14,12 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.repository;
+package com.hll.hyperlightlogistics.mapper;
 
-import com.hll.hyperlightlogistics.model.Customer;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.hll.hyperlightlogistics.dto.WarehouseRequestDTO;
+import com.hll.hyperlightlogistics.model.Warehouse;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> { }
+@Mapper(componentModel = "spring")
+public interface WarehouseMapper {
+
+    WarehouseMapper INSTANCE = Mappers.getMapper(WarehouseMapper.class);
+
+    @Mapping(target = "id", ignore = true)
+    Warehouse toEntity(WarehouseRequestDTO warehouseRequestDTO);
+
+    WarehouseRequestDTO toDto(Warehouse warehouseEntity);
+
+}

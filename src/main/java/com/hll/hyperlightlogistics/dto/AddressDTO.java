@@ -14,12 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.repository;
+package com.hll.hyperlightlogistics.dto;
 
-import com.hll.hyperlightlogistics.model.Customer;
-import org.springframework.data.jpa.repository.JpaRepository;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> { }
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class AddressDTO {
+
+    private String country;
+    private String state;
+    private String city;
+    private String street;
+    private String postcode;
+
+}
