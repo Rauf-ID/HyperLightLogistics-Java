@@ -19,21 +19,41 @@
 
 package com.hll.hyperlightlogistics.controller;
 
+import com.hll.hyperlightlogistics.dto.DeliveryRequestDTO;
+import com.hll.hyperlightlogistics.dto.ProductDeliveryOptionDTO;
 import com.hll.hyperlightlogistics.model.DeliveryOption;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/orders")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/orders")
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
+
+    @PostMapping("/options")
+    public ResponseEntity<List<ProductDeliveryOptionDTO>> getDeliveryOptions(@RequestBody DeliveryRequestDTO request) {
+        List<ProductDeliveryOptionDTO> deliveryOptions = orderService.calculateDeliveryOptions(request);
+
+        return ResponseEntity.ok(deliveryOptions);
+    }
+
+    @PostMapping("/createOrderAndInitiate/{customerId}")
+    public ResponseEntity<String> createOrderAndInitiate(@PathVariable Long customerId) {
+        orderService.createOrderAndInitiateDelivery(customerId);
+
+        return ResponseEntity.ok("Delivery initiated");
+    }
 
     @PostMapping("/options")
     public ResponseEntity<List<DeliveryOption>> prepareOrderAndGetDeliveryOptions(

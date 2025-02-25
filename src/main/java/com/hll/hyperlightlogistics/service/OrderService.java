@@ -19,38 +19,43 @@
 
 package com.hll.hyperlightlogistics.service;
 
+import com.hll.hyperlightlogistics.dto.DeliveryRequestDTO;
+import com.hll.hyperlightlogistics.dto.ProductDeliveryOptionDTO;
+import com.hll.hyperlightlogistics.grpc.GrpcClient;
 import com.hll.hyperlightlogistics.kafka.KafkaProducer;
+import com.hll.hyperlightlogistics.mapper.DeliveryOptionMapper;
 import com.hll.hyperlightlogistics.model.DeliveryOption;
 import com.hll.hyperlightlogistics.model.Order;
-import com.hll.hyperlightlogistics.repository.CustomerRepository;
-import com.hll.hyperlightlogistics.repository.DeliveryOptionRepository;
-import com.hll.hyperlightlogistics.repository.InventoryRepository;
 import com.hll.hyperlightlogistics.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import proto.DeliveryRequest;
+import proto.DeliveryResponse;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    private final GrpcClient grpcClient;
+    private final KafkaProducer kafkaProducer;
+    private final OrderRepository orderRepository;
+    private final DeliveryOptionMapper deliveryOptionMapper;
 
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    @Autowired
-    private InventoryRepository inventoryRepository;
-
-    @Autowired
-    private DeliveryOptionRepository deliveryOptionRepository;
-
-    @Autowired
-    private KafkaProducer kafkaProducer;
+    public List<ProductDeliveryOptionDTO> calculateDeliveryOptions(DeliveryRequestDTO deliveryRequest) {
+        DeliveryRequest grpcRequest = deliveryOptionMapper.convertToGrpcRequest(deliveryRequest);
+        DeliveryResponse grpcResponse = grpcClient.getDeliveryOptions(grpcRequest);
+        return deliveryOptionMapper.convertToDto(grpcResponse);
+    }
 
     public Order createOrder(Order orderRequest) {
         return new Order();
+    }
+
+    public void createOrderAndInitiateDelivery(Long customerId) {
+        String message = String.format("Order %d initiated for delivery", 0);
+        kafkaProducer.sendMessage("delivery-initiation-topic", message);
     }
 
     public List<DeliveryOption> requestDeliveryOptions(Order order) {
