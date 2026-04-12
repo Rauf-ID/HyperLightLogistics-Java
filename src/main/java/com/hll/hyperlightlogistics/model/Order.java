@@ -29,11 +29,16 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -61,16 +66,20 @@ public class Order {
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "warehouse_id")
-    private Warehouse warehouse;
-
-    @ManyToOne
     @JoinColumn(name = "delivery_option_id")
     private DeliveryOption deliveryOption;
 
-    private Integer quantity;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderProduct> orderProducts = new ArrayList<>();
+
+    private String deliveryAddress;
+    private Double shippingPrice;
     private LocalDateTime orderDate;
     private String status;
-    private Double totalPrice;
+
+    public void addProduct(Product product, Integer quantity) {
+        OrderProduct orderProduct = new OrderProduct(this, product, quantity);
+        orderProducts.add(orderProduct);
+    }
 
 }

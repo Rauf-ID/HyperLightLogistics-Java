@@ -17,11 +17,17 @@
  * Copyright (C) 2024 Rauf Agaguliev
  */
 
-package com.hll.hyperlightlogistics.repository;
+package com.hll.hyperlightlogistics.dto;
 
-import com.hll.hyperlightlogistics.model.DeliveryOption;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import lombok.Data;
 
-@Repository
-public interface DeliveryOptionRepository extends JpaRepository<DeliveryOption, Long> {}
+import java.util.List;
+
+@Data
+public class DeliveryRequestDTO {
+
+    private Long customerId;
+    private DeliveryAddressDTO deliveryAddress;
+    private List<ProductDTO> products;
+
+}

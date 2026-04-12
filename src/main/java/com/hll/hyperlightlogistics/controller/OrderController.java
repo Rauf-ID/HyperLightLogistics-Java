@@ -37,22 +37,37 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/orders")
 @RequiredArgsConstructor
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/orders")
 public class OrderController {
 
     private final OrderService orderService;
+    private final OrderService orderService;
 
-    @PostMapping
-    public ResponseEntity<Order> createOrder(
-            @RequestParam Long customerId,
-            @RequestParam Long productId,
-            @RequestParam Integer quantity) {
+    @PostMapping("/options")
+    public ResponseEntity<List<ProductDeliveryOptionDTO>> getDeliveryOptions(@RequestBody DeliveryRequestDTO request) {
+        List<ProductDeliveryOptionDTO> deliveryOptions = orderService.calculateDeliveryOptions(request);
 
-        Order order = orderService.createOrder();
+        return ResponseEntity.ok(deliveryOptions);
+    }
 
-        orderService.requestDeliveryOptions(order);
+    @PostMapping("/createOrderAndInitiate/{customerId}")
+    public ResponseEntity<String> createOrderAndInitiate(@PathVariable Long customerId) {
+        orderService.createOrderAndInitiateDelivery(customerId);
+
+        return ResponseEntity.ok("Delivery initiated");
+    }
 
         return ResponseEntity.ok(order);
 
+    @PostMapping("/options")
+    public ResponseEntity<List<DeliveryOption>> prepareOrderAndGetDeliveryOptions(
+            @RequestBody Order orderRequest) {
+        Order order = orderService.createOrder(orderRequest);
+
+        List<DeliveryOption> deliveryOptions = orderService.requestDeliveryOptions(order);
+
+        return ResponseEntity.ok(deliveryOptions);
     }
 
     @PostMapping("/{orderId}/delivery")

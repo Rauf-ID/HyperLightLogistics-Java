@@ -17,20 +17,17 @@
  * Copyright (C) 2024 Rauf Agaguliev
  */
 
-package com.hll.hyperlightlogistics.config;
+package com.hll.hyperlightlogistics.dto;
 
-import org.apache.kafka.clients.admin.NewTopic;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.config.TopicBuilder;
+import lombok.Data;
 
-@Configuration
-public class KafkaTopicConfig {
+import java.time.LocalDate;
 
-//    @Bean
-//    public NewTopic deliveryOptionsResponseTopic() {
-//        return TopicBuilder.name("delivery-options-request-topic")
-//                .build();
-//    }
+@Data
+public class DeliveryOptionDTO {
+
+    private String type;
+    private Double price;
+    private String deliveryTime;
 
 }

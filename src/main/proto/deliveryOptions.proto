@@ -1,0 +1,63 @@
+/*
+ * This file is part of HyperLightLogistics-Java.
+ *
+ * HyperLightLogistics-Go is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * HyperLightLogistics-Go is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with HyperLightLogistics-Go.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2024 Rauf Agaguliev
+ */
+
+syntax = "proto3";
+
+package proto;
+
+option go_package = "HyperLightLogistics-Go/api/proto";
+option java_multiple_files = true;
+
+service DeliveryOptionsService {
+    rpc CalculateDeliveryOptions (DeliveryRequest) returns (DeliveryResponse) {}
+}
+
+message Product {
+    uint64 productId = 1;
+    uint32 quantity = 2;
+}
+
+message DeliveryAddress {
+    string country = 1;
+    string state = 2;
+    string city = 3;
+    string street = 4;
+    string zipcode = 5;
+}
+
+message DeliveryRequest {
+    uint64 customerId = 1;
+    DeliveryAddress deliveryAddress = 2;
+    repeated Product products = 3;
+}
+
+message DeliveryOptions {
+    string type = 1;
+    string deliveryTime = 2;
+    double price = 3;
+}
+
+message ProductDeliveryOptions {
+    uint64 productId = 1;
+    repeated DeliveryOptions deliveryOptions = 2;
+}
+
+message DeliveryResponse {
+    repeated ProductDeliveryOptions products = 1;
+}

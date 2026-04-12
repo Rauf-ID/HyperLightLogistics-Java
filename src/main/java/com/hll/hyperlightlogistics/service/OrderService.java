@@ -19,12 +19,18 @@
 
 package com.hll.hyperlightlogistics.service;
 
-import com.hll.hyperlightlogistics.exceptions.DatabaseException;
+import com.hll.hyperlightlogistics.dto.DeliveryRequestDTO;
+import com.hll.hyperlightlogistics.dto.ProductDeliveryOptionDTO;
+import com.hll.hyperlightlogistics.grpc.GrpcClient;
 import com.hll.hyperlightlogistics.kafka.KafkaProducer;
+import com.hll.hyperlightlogistics.mapper.DeliveryOptionMapper;
+import com.hll.hyperlightlogistics.model.DeliveryOption;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import proto.DeliveryRequest;
+import proto.DeliveryResponse;
 
 import java.util.List;
 
@@ -32,42 +38,37 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
 
-    private final OrderRepository orderRepository;
+    private final GrpcClient grpcClient;
     private final KafkaProducer kafkaProducer;
+    private final OrderRepository orderRepository;
+    private final DeliveryOptionMapper deliveryOptionMapper;
 
-    public Order createOrder() {
+    public List<ProductDeliveryOptionDTO> calculateDeliveryOptions(DeliveryRequestDTO deliveryRequest) {
+        DeliveryRequest grpcRequest = deliveryOptionMapper.convertToGrpcRequest(deliveryRequest);
+        DeliveryResponse grpcResponse = grpcClient.getDeliveryOptions(grpcRequest);
+        return deliveryOptionMapper.convertToDto(grpcResponse);
+    }
+
+    public Order createOrder(Order orderRequest) {
         return new Order();
     }
 
-    public void requestDeliveryOptions(Order order) {
+    public void createOrderAndInitiateDelivery(Long customerId) {
+        String message = String.format("Order %d initiated for delivery", 0);
+        kafkaProducer.sendMessage("delivery-initiation-topic", message);
+    }
 
-        String message = String.format("{ \"orderId\": %d, \"productId\": %d, \"customerId\": %d, \"quantity\": %d }",
-                order.getId(), order.getProducts().getFirst().getId(), order.getCustomer().getId(), order.getQuantity());
-
-        kafkaProducer.sendMessage("delivery-options-request-topic", message);
-
+    public List<DeliveryOption> requestDeliveryOptions(Order order) {
+        return null;
     }
 
     public void initiateDelivery(Long orderId) {
-
         Order order = orderRepository.findOrderById(orderId).orElse(null);
         String message = null;
         if (order != null) {
             message = String.format("Order %d initiated for delivery", order.getId());
         }
         kafkaProducer.sendMessage("delivery-initiation-topic", message);
-
-    }
-
-    public List<Order> getOrdersByCustomerId(Long customerId) {
-
-        try {
-            return orderRepository.findByCustomerId(customerId);
-        }catch (Exception e){
-            throw new DatabaseException("Failed to fetch addresses for customer ID: " + customerId, e);
-
-        }
-
     }
 
 }

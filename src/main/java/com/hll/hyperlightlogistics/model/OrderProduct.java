@@ -17,11 +17,38 @@
  * Copyright (C) 2024 Rauf Agaguliev
  */
 
-package com.hll.hyperlightlogistics.repository;
+package com.hll.hyperlightlogistics.model;
 
-import com.hll.hyperlightlogistics.model.DeliveryOption;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Repository
-public interface DeliveryOptionRepository extends JpaRepository<DeliveryOption, Long> {}
+@Entity
+@Table(name = "order_products")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrderProduct {
+
+    @EmbeddedId
+    private OrderProductId id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("orderId")
+    private Order order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("productId")
+    private Product product;
+
+    private Integer quantity;
+
+    public OrderProduct(Order order, Product product, Integer quantity) {
+        this.id = new OrderProductId(order.getId(), product.getId());
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+}

@@ -14,14 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2026 Rauf Agaguliev
  */
 
-package com.hll.hyperlightlogistics.repository;
+package com.hll.hyperlightlogistics.constant;
 
-import com.hll.hyperlightlogistics.model.DeliveryOption;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+public final class Endpoints {
 
-@Repository
-public interface DeliveryOptionRepository extends JpaRepository<DeliveryOption, Long> {}
+    public final String TEST = "";
+
+}

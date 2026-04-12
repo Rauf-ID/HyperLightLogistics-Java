@@ -14,23 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Vsevolod Batyrov
+ * Copyright (C) 2024 Rauf Agaguliev
  */
 
 package com.hll.hyperlightlogistics.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProductDTO {
 
-    private String name;
-    private String description;
-    private Double price;
+    private Long productId;
+    private Integer quantity;
 
 }
-

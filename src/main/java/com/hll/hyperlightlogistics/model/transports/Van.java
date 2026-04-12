@@ -17,41 +17,42 @@
  * Copyright (C) 2024 Rauf Agaguliev
  */
 
-package com.hll.hyperlightlogistics.model;
+package com.hll.hyperlightlogistics.model.transports;
 
-import jakarta.persistence.Column;
+import com.hll.hyperlightlogistics.model.Warehouse;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "warehouses")
+@Table(name = "vans")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Warehouse {
+@NoArgsConstructor
+public class Van {
 
     @Id
-    @SequenceGenerator(name = "warehouses_seq", sequenceName = "warehouses_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "warehouses_seq")
+    @SequenceGenerator(name = "vans_seq", sequenceName = "vans_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vans_seq")
     private Long id;
 
-    @Column(precision = 10, scale = 5)
-    private BigDecimal latitude;
+    @ManyToOne
+    @JoinColumn(name = "warehouse_id")
+    private Warehouse warehouse;
 
-    @Column(precision = 10, scale = 5)
-    private BigDecimal longitude;
-
-    private String type;
     private String status;
-    private BigDecimal latitude;
-    private BigDecimal longitude;
+    private Float capacity;
+    private Float load;
+    private LocalDateTime nextAvailableTime;
+
 }

@@ -17,9 +17,8 @@
  * Copyright (C) 2024 Rauf Agaguliev
  */
 
-package com.hll.hyperlightlogistics.model;
+package com.hll.hyperlightlogistics.model.transports;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,28 +29,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "warehouses")
+@Table(name = "flights")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Warehouse {
+@NoArgsConstructor
+public class Flight {
 
     @Id
-    @SequenceGenerator(name = "warehouses_seq", sequenceName = "warehouses_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "warehouses_seq")
+    @SequenceGenerator(name = "flights_seq", sequenceName = "flights_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "flights_seq")
     private Long id;
 
-    @Column(precision = 10, scale = 5)
-    private BigDecimal latitude;
-
-    @Column(precision = 10, scale = 5)
-    private BigDecimal longitude;
-
-    private String type;
     private String status;
-    private BigDecimal latitude;
-    private BigDecimal longitude;
+    private Float capacity;
+    private Float load;
+    private String originAirportLocation;
+    private String destinationAirportLocation;
+    private LocalDateTime departureTime;
+    private LocalDateTime arrivalTime;
+
 }

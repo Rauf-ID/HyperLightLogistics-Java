@@ -23,7 +23,9 @@ import com.hll.hyperlightlogistics.model.Inventory;
 import com.hll.hyperlightlogistics.model.Product;
 import com.hll.hyperlightlogistics.model.Warehouse;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
 
     Inventory findByWarehouseAndProduct(Warehouse warehouse, Product product);

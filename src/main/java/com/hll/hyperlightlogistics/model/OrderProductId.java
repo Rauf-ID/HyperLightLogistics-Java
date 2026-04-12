@@ -17,15 +17,22 @@
  * Copyright (C) 2024 Rauf Agaguliev
  */
 
-package com.hll.hyperlightlogistics.kafka;
+package com.hll.hyperlightlogistics.model;
 
-import org.springframework.kafka.annotation.KafkaListener;
+import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class KafkaConsumer {
+import java.io.Serializable;
 
-    @KafkaListener(topics = "delivery-options-response-topic", groupId = "delivery_group")
-    public void listenDeliveryOptions(String message) {
-        System.out.println("Received delivery options: " + message);
-    }
+@Embeddable
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrderProductId implements Serializable {
+
+    private Long orderId;
+    private Long productId;
 
 }
