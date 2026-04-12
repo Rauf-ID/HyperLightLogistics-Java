@@ -19,13 +19,25 @@
 
 package com.hll.hyperlightlogistics.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.aspectj.weaver.ast.Or;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +52,14 @@ public class Order {
     @SequenceGenerator(name = "orders_seq", sequenceName = "orders_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orders_seq")
     private Long id;
+
+    @ManyToMany
+    @JoinTable(
+            name = "order_products",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

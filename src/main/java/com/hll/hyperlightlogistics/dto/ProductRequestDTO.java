@@ -14,43 +14,27 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.model;
+package com.hll.hyperlightlogistics.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "inventory")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Inventory {
+public class ProductRequestDTO {
 
-    @Id
-    @SequenceGenerator(name = "inventory_seq", sequenceName = "inventory_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventory_seq")
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "warehouse_id")
-    private Warehouse warehouse;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
-    private Integer quantity;
+    private String name;
+    private String description;
+    private Double price;
+    private String category;
+    private Double weight;
+    private Double length;
+    private Double width;
+    private Double height;
 
 }

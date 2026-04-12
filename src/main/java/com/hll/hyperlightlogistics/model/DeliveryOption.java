@@ -19,14 +19,14 @@
 
 package com.hll.hyperlightlogistics.model;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
-import lombok.Data;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -44,4 +44,5 @@ public class DeliveryOption {
     private String type;
     private Double price;
     private Long estimatedDeliveryTime;
+
 }

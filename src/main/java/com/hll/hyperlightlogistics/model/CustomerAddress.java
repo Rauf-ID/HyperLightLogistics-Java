@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
 package com.hll.hyperlightlogistics.model;
@@ -32,25 +32,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "inventory")
+@Table(name = "customer_addresses")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Inventory {
+public class CustomerAddress {
 
     @Id
-    @SequenceGenerator(name = "inventory_seq", sequenceName = "inventory_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventory_seq")
+    @SequenceGenerator(name = "address_seq", sequenceName = "address_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "warehouse_id")
-    private Warehouse warehouse;
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
-    private Integer quantity;
+    private String country;
+    private String state;
+    private String city;
+    private String street;
+    private String postcode;
 
 }
