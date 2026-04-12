@@ -14,23 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.config;
+package com.hll.hyperlightlogistics.repository;
 
-import org.apache.kafka.clients.admin.NewTopic;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.config.TopicBuilder;
+import com.hll.hyperlightlogistics.model.CustomerAddress;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@Configuration
-public class KafkaTopicConfig {
+import java.util.List;
 
-//    @Bean
-//    public NewTopic deliveryOptionsResponseTopic() {
-//        return TopicBuilder.name("delivery-options-request-topic")
-//                .build();
-//    }
+@Repository
+public interface CustomerAddressesRepository extends JpaRepository<CustomerAddress, Long> {
+
+    List<CustomerAddress> findByCustomerId(Long customerId);
 
 }

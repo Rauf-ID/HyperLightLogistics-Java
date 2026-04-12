@@ -19,15 +19,19 @@
 
 package com.hll.hyperlightlogistics.model;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
-import lombok.Data;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -41,7 +45,10 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customers_seq")
     private Long id;
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CustomerAddress> customerAddresses;
+
     private String name;
     private String email;
-    private String address;
+
 }

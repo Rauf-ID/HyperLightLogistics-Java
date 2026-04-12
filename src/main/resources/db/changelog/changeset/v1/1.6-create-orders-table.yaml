@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.7
+      author: Rauf Agaguliev
+      preConditions:
+        onFail: MARK_RAN
+        onError: HALT
+        preConditions:
+          - not:
+              sequenceExists:
+                sequenceName: "orders_sequence"
+          - not:
+              tableExists:
+                tableName: "orders"
+      changes:
+        - createSequence:
+            sequenceName: "orders_sequence"
+            startValue: 1
+            incrementBy: 1
+        - createTable:
+            tableName: "orders"
+            columns:
+              - column:
+                  name: "id"
+                  type: "BIGINT"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  autoIncrement: false
+                  defaultValueComputed: "nextval('orders_sequence')"
+              - column:
+                  name: "customer_id"
+                  type: "BIGINT"
+              - column:
+                  name: "delivery_option_id"
+                  type: "BIGINT"
+              - column:
+                  name: "delivery_address"
+                  type: "VARCHAR(255)"
+              - column:
+                  name: "shipping_price"
+                  type: "DOUBLE PRECISION"
+              - column:
+                  name: "order_date"
+                  type: "TIMESTAMP"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "status"
+                  type: "VARCHAR(255)"
+        - addForeignKeyConstraint:
+            baseTableName: "orders"
+            baseColumnNames: "customer_id"
+            referencedTableName: "customers"
+            referencedColumnNames: "id"
+            constraintName: "fk_orders_customers_id"
+        - addForeignKeyConstraint:
+            baseTableName: "orders"
+            baseColumnNames: "delivery_option_id"
+            referencedTableName: "delivery_options"
+            referencedColumnNames: "id"
+            constraintName: "fk_orders_delivery_options_id"

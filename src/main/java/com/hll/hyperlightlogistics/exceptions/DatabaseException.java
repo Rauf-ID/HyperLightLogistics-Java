@@ -14,18 +14,22 @@
  * You should have received a copy of the GNU General Public License
  * along with HyperLightLogistics-Java.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2024 Rauf Agaguliev
+ * Copyright (C) 2024 Vsevolod Batyrov
  */
 
-package com.hll.hyperlightlogistics.kafka;
+package com.hll.hyperlightlogistics.exceptions;
 
-import org.springframework.kafka.annotation.KafkaListener;
+public class DatabaseException extends RuntimeException {
 
-public class KafkaConsumer {
+    public DatabaseException(String message) {
 
-    @KafkaListener(topics = "delivery-options-response-topic", groupId = "delivery_group")
-    public void listenDeliveryOptions(String message) {
-        System.out.println("Received delivery options: " + message);
+        super(message);
+
     }
 
+    public DatabaseException(String message, Throwable cause) {
+
+        super(message, cause);
+
+    }
 }

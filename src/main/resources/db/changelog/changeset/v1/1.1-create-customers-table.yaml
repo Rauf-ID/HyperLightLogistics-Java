@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.1
+      author: Rauf Agaguliev
+      preConditions:
+        onFail: MARK_RAN
+        onError: HALT
+        preConditions:
+          - not:
+              sequenceExists:
+                sequenceName: "customers_sequence"
+          - not:
+              tableExists:
+                tableName: "customers"
+      changes:
+        - createSequence:
+            sequenceName: "customers_sequence"
+            startValue: 1
+            incrementBy: 1
+        - createTable:
+            tableName: "customers"
+            columns:
+              - column:
+                  name: "id"
+                  type: "BIGINT"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  autoIncrement: false
+                  defaultValueComputed: "nextval('customers_sequence')"
+              - column:
+                  name: "name"
+                  type: "VARCHAR(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "email"
+                  type: "VARCHAR(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "address"
+                  type: "VARCHAR(255)"

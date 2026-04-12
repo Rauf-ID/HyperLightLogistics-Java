@@ -19,36 +19,77 @@
 
 package com.hll.hyperlightlogistics.controller;
 
+import com.hll.hyperlightlogistics.dto.ProductDTO;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/orders")
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/orders")
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
+    private final OrderService orderService;
 
-    @PostMapping
-    public ResponseEntity<Order> createOrder(
-            @RequestParam Long customerId,
-            @RequestParam Long productId,
-            @RequestParam Integer quantity) {
+    @PostMapping("/options")
+    public ResponseEntity<List<ProductDeliveryOptionDTO>> getDeliveryOptions(@RequestBody DeliveryRequestDTO request) {
+        List<ProductDeliveryOptionDTO> deliveryOptions = orderService.calculateDeliveryOptions(request);
 
-        Order order = orderService.createOrder();
-
-        orderService.requestDeliveryOptions(order);
-
-        return ResponseEntity.ok(order);
+        return ResponseEntity.ok(deliveryOptions);
     }
 
-    @PostMapping("/{orderId}/initiate-delivery")
+    @PostMapping("/createOrderAndInitiate/{customerId}")
+    public ResponseEntity<String> createOrderAndInitiate(@PathVariable Long customerId) {
+        orderService.createOrderAndInitiateDelivery(customerId);
+
+        return ResponseEntity.ok("Delivery initiated");
+    }
+
+        return ResponseEntity.ok(order);
+
+    @PostMapping("/options")
+    public ResponseEntity<List<DeliveryOption>> prepareOrderAndGetDeliveryOptions(
+            @RequestBody Order orderRequest) {
+        Order order = orderService.createOrder(orderRequest);
+
+        List<DeliveryOption> deliveryOptions = orderService.requestDeliveryOptions(order);
+
+        return ResponseEntity.ok(deliveryOptions);
+    }
+
+    @PostMapping("/{orderId}/delivery")
     public ResponseEntity<String> initiateDelivery(@PathVariable Long orderId) {
+
         orderService.initiateDelivery(orderId);
         return ResponseEntity.ok("Delivery initiated");
+
+    }
+
+    @GetMapping("/history/{customerId}")
+    public ResponseEntity<List<ProductDTO>> getOrderHistory(@PathVariable Long customerId) {
+
+        List<Order> orders = orderService.getOrdersByCustomerId(customerId);
+
+        List<ProductDTO> productList = orders.stream()
+                .flatMap(order -> order.getProducts().stream())
+                .map(product -> new ProductDTO(product.getName(), product.getDescription(), product.getPrice()))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(productList);
+
     }
 
 }
