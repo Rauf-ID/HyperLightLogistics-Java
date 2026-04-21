@@ -8,10 +8,10 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: validate #none #update
     properties:
       hibernate:
-        format_sql: true
+        format_sql: true #?
         dialect: org.hibernate.dialect.PostgreSQLDialect
   liquibase:
     enabled: true

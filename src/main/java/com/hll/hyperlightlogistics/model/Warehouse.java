@@ -52,6 +52,6 @@ public class Warehouse {
 
     private String type;
     private String status;
-    private BigDecimal latitude;
-    private BigDecimal longitude;
+//    private BigDecimal latitude;
+//    private BigDecimal longitude;
 }

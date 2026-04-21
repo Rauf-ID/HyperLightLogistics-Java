@@ -19,7 +19,10 @@
 
 package com.hll.hyperlightlogistics.controller;
 
+import com.hll.hyperlightlogistics.dto.DeliveryRequestDTO;
 import com.hll.hyperlightlogistics.dto.ProductDTO;
+import com.hll.hyperlightlogistics.dto.ProductDeliveryOptionDTO;
+import com.hll.hyperlightlogistics.model.DeliveryOption;
 import com.hll.hyperlightlogistics.model.Order;
 import com.hll.hyperlightlogistics.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -27,21 +30,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/orders")
 @RequiredArgsConstructor
-@RequiredArgsConstructor
-@RequestMapping("/api/v1/orders")
+@RequestMapping({"/api/orders", "/api/v1/orders"})
 public class OrderController {
 
-    private final OrderService orderService;
     private final OrderService orderService;
 
     @PostMapping("/options")
@@ -57,8 +57,6 @@ public class OrderController {
 
         return ResponseEntity.ok("Delivery initiated");
     }
-
-        return ResponseEntity.ok(order);
 
     @PostMapping("/options")
     public ResponseEntity<List<DeliveryOption>> prepareOrderAndGetDeliveryOptions(
@@ -78,18 +76,18 @@ public class OrderController {
 
     }
 
-    @GetMapping("/history/{customerId}")
-    public ResponseEntity<List<ProductDTO>> getOrderHistory(@PathVariable Long customerId) {
-
-        List<Order> orders = orderService.getOrdersByCustomerId(customerId);
-
-        List<ProductDTO> productList = orders.stream()
-                .flatMap(order -> order.getProducts().stream())
-                .map(product -> new ProductDTO(product.getName(), product.getDescription(), product.getPrice()))
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(productList);
-
-    }
+//    @GetMapping("/history/{customerId}")
+//    public ResponseEntity<List<ProductDTO>> getOrderHistory(@PathVariable Long customerId) {
+//
+//        List<Order> orders = orderService.getOrdersByCustomerId(customerId);
+//
+//        List<ProductDTO> productList = orders.stream()
+//                .flatMap(order -> order.getProducts().stream())
+//                .map(product -> new ProductDTO(product.getName(), product.getDescription(), product.getPrice()))
+//                .collect(Collectors.toList());
+//
+//        return ResponseEntity.ok(productList);
+//
+//    }
 
 }

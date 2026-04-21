@@ -27,7 +27,7 @@ import proto.DeliveryOptionsServiceGrpc;
 import proto.DeliveryRequest;
 import proto.DeliveryResponse;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -53,4 +53,5 @@ public class GrpcClient {
     public void shutdown() throws InterruptedException {
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
     }
+
 }
