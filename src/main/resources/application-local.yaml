@@ -1,15 +1,15 @@
 spring:
-  application:
-    name: HyperLightLogistics
+  datasource:
+    url: jdbc:postgresql://localhost:5433/hyperlightlogistics
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
   jpa:
+    show-sql: true
     hibernate:
-      ddl-auto: validate #none #update
+      ddl-auto: none #none #update #validate
     properties:
       hibernate:
         format_sql: true #?
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-  liquibase:
-    enabled: true
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
@@ -20,6 +20,11 @@ spring:
 #      max-poll-records: 5
 #      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+
+server:
+  port: 8080
 
 grpc:
   server:

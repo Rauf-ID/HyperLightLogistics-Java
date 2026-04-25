@@ -58,15 +58,15 @@ public class OrderController {
         return ResponseEntity.ok("Delivery initiated");
     }
 
-    @PostMapping("/options")
-    public ResponseEntity<List<DeliveryOption>> prepareOrderAndGetDeliveryOptions(
-            @RequestBody Order orderRequest) {
-        Order order = orderService.createOrder(orderRequest);
-
-        List<DeliveryOption> deliveryOptions = orderService.requestDeliveryOptions(order);
-
-        return ResponseEntity.ok(deliveryOptions);
-    }
+//    @PostMapping("/options")
+//    public ResponseEntity<List<DeliveryOption>> prepareOrderAndGetDeliveryOptions(
+//            @RequestBody Order orderRequest) {
+//        Order order = orderService.createOrder(orderRequest);
+//
+//        List<DeliveryOption> deliveryOptions = orderService.requestDeliveryOptions(order);
+//
+//        return ResponseEntity.ok(deliveryOptions);
+//    }
 
     @PostMapping("/{orderId}/delivery")
     public ResponseEntity<String> initiateDelivery(@PathVariable Long orderId) {
